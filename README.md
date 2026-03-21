@@ -62,61 +62,52 @@ http-server -p 8000
 
 ```
 📁 karlan-clicker/
-├── index.html          (114 linhas) - Estrutura HTML5 semântica
-├── script.js           (854 linhas) - Game engine completo
-├── styles.css          (965 linhas) - Estilos + animações
+├── karlan.html                     - App em arquivo único (HTML + CSS + JS inline)
 ├── musica.mp3                       - Áudio ambiente
 ├── render.yaml                      - Config Render Deploy
 └── package.json                     - Metadata projeto
 ```
 
-### Scripts Principais
+### Arquivo único
 
-**`script.js`** — Game engine monolítico com:
-- `newState()` - Inicialização
-- `fireClick(n)` - Clique com combo
-- `compute()` - Produção passiva
-- `buyBld(id)` - Compra prédios
-- `saveGame()` - localStorage
-- `doPrestige()` - Reset com caspa
-- `triggerEvent()` - Eventos aleatórios
-
-**`styles.css`** — Design com:
-- 3-column grid layout
-- CSS variables (cores, espaçamento)
-- Animações keyframes (pop, float, slide)
-- Responsivo mobile
+O jogo roda inteiro em `karlan.html` (HTML/CSS/JS no mesmo arquivo) e só depende do `musica.mp3` como asset.
 
 ---
 
 ## ⚙️ Funcionalidades
 
 ✅ **Sistema de Combo Dual-Button**
+
 - Mecânica única (Q + E simultâneo)
 - Multiplicador visual 1-20x
 - Feedback imediato
 
 ✅ **Economia Balanceada**
+
 - 12 prédios (Escritório → Estrela)
 - Crescimento exponencial (×1.15 custo)
 - Milestones motivadores
 
 ✅ **Achievements (35 total)**
+
 - Marcos de produção
 - Descobertas ocultas
 - Notificações visuais
 
 ✅ **Eventos Dinâmicos (18 tipos)**
+
 - Multiplicadores 0.2x até 31x
 - Aleatórios a cada 30-60s
 - Interfere na gameplay
 
 ✅ **Canvas Physics**
+
 - Partículas com gravidade
 - Bezier curves para movimento
 - 40+ partículas simultâneas
 
 ✅ **Persistência**
+
 - localStorage (3.2KB save)
 - Compressão JSON
 - Recovery em caso de corrupção
@@ -126,7 +117,7 @@ http-server -p 8000
 ## 📊 Performance
 
 | Métrica | Valor | Status |
-|---------|-------|--------|
+| --- | --- | --- |
 | FPS Idle | 60 | ✅ |
 | FPS Spam | 45-50 | ✅ |
 | Memory | ~12MB | 🟡 |
@@ -141,27 +132,20 @@ http-server -p 8000
 
 ## 🧪 Testes
 
-### Auditoria Automática
-```javascript
-// F12 > Console
-runAudit()
-```
+Sem harness de auditoria separado no repositório.
 
-Executa 8 testes:
-1. ✅ fireClick() - Combo 1-20x
-2. ✅ Produção passiva - 60fps RAF
-3. ✅ buyBld() - Custo exponencial
-4. ✅ buyClkUpg() - Multiplicadores
-5. ✅ triggerEvent() - 18 eventos
-6. ✅ saveGame/loadSave() - localStorage
-7. ✅ doPrestige() - Reset funcional
-8. ✅ checkWin() - 3M fios = vitória
+Recomendado:
+
+- abrir o DevTools (F12) e acompanhar erros no Console
+- validar save/load via refresh e `localStorage`
+- validar áudio (mute/on) após interação do usuário
 
 ---
 
 ## 🚀 Deploy no Render (Static Site)
 
 ### Opção 1: Via Dashboard Render.com
+
 1. Fork/Clone repositório
 2. [render.com](https://render.com) → New → Static Site
 3. GitHub repo: `Machado143/careca`
@@ -170,16 +154,19 @@ Executa 8 testes:
 6. Deploy ✅
 
 ### Opção 2: Via `render.yaml`
+
 ```bash
 git push
 # Render detecta render.yaml automaticamente
 ```
 
 ### Environment Variables
+
 Nenhuma necessária (SPA pura)
 
 ### Cache Headers
-```
+
+```text
 / → 300s (HTML muda)
 /* → 3600s (Assets estáticos)
 ```
@@ -189,22 +176,26 @@ Nenhuma necessária (SPA pura)
 ## 📈 Roadmap
 
 ### Imediato (2h) - v1.1
+
 - [ ] Memory leak fix (AbortController)
 - [ ] Dirty flag pattern UI
 - [ ] Error handling JSON.parse
 - [ ] Hair pool limit
 
 ### Sprint 1 (8-10h) - v1.2
+
 - [ ] Performance +15fps (dirty flags)
 - [ ] Memory -30% (pools)
 - [ ] Viewport pause RAF
 
 ### Sprint 2 (15-20h) - v2.0
+
 - [ ] TypeScript refactor
 - [ ] Service layer (GameEngine class)
 - [ ] Jest unit tests (>80% coverage)
 
 ### Sprint 3+ (2-4w) - v2.1+
+
 - [ ] Web Worker compute
 - [ ] GitHub Actions CI/CD
 - [ ] IndexedDB backup
@@ -213,10 +204,7 @@ Nenhuma necessária (SPA pura)
 
 ## 🔍 Auditoria Técnica
 
-Análise completa disponível em:
-- [`AUDIT_REPORT.md`](AUDIT_REPORT.md) - Relatório detalhado
-- [`README_AUDIT.md`](README_AUDIT.md) - Guia de testes
-- [`ROADMAP.md`](ROADMAP.md) - Plano implementação
+Auditoria e docs antigas foram removidas junto com a versão multi-arquivo.
 
 ---
 
@@ -228,10 +216,10 @@ MIT © Machado143
 
 ## 🎯 Próximos Passos
 
-1. **Jogar**: `index.html`
-2. **Testar**: `F12 > Console > runAudit()`
+1. **Jogar**: `karlan.html`
+2. **Testar**: abrir F12 e acompanhar Console/Network
 3. **Deploy**: Push to `main` (Render detecta automaticamente)
-4. **Melhorar**: Seguir [`ROADMAP.md`](ROADMAP.md)
+4. **Melhorar**: manter `karlan.html` como fonte única de verdade
 
 ---
 
