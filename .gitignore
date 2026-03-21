@@ -1,0 +1,34 @@
+# Auditoria (não vai para produção)
+AUDIT_REPORT.md
+README_AUDIT.md
+RESUMO_AUDITORIA.txt
+audit.js
+audit_report.py
+audit_result.json
+CONCLUSAO.txt
+ROADMAP.md
+
+# Dependências
+node_modules/
+package-lock.json
+yarn.lock
+
+# OS
+.DS_Store
+.env
+.env.local
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Build
+dist/
+build/
+.next/

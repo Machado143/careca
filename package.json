@@ -1,0 +1,25 @@
+{
+  "name": "karlan-clicker",
+  "version": "1.0.0",
+  "description": "🎮 KARLAN CLICKER - Idle/Clicker Game | Vanilla JS + Canvas Physics",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "http-server -p 8000 -o",
+    "build": "echo 'Static site - no build needed'",
+    "test": "echo 'Run F12 > Console > runAudit()'",
+    "audit": "node audit.js"
+  },
+  "keywords": [
+    "clicker",
+    "idle",
+    "game",
+    "vanilla-js",
+    "canvas"
+  ],
+  "author": "Machado143",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

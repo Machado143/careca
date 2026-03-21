@@ -1,0 +1,23 @@
+services:
+  - type: static_site
+    name: karlan-clicker
+    env: static
+    buildCommand: ""
+    staticPublishPath: .
+    routes:
+      - path: /
+        destination: /index.html
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
+      - path: /
+        name: Cache-Control
+        value: public, max-age=300
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+    envVars: []
