@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KARLAN CLICKER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="tb">
+    <button class="tb-btn" id="statBtn" style="font-size: 16px;">📊 Stats</button>
+    <div class="tb-stats">
+      <span id="cpDisp">$: 0</span>
+      <span id="tpsDisp">$/s: 0</span>
+    </div>
+    <button class="tb-btn" id="audioBtn">🔊 Audio</button>
+  </div>
+
+  <!-- LEFT PANEL -->
+  <div class="lp">
+    <div class="lp-content">
+      <h3>🔬 Diagnostics</h3>
+      <table style="width: 100%; font-size: 12px; margin-top: 10px;">
+        <tr><td>Cliques:</td><td id="diag-clicks">0</td></tr>
+        <tr><td>Prod:</td><td id="diag-prod">0</td></tr>
+        <tr><td>Prestigio:</td><td id="diag-prestige">0</td></tr>
+        <tr><td>Caspa Usada:</td><td id="diag-caspa">0%</td></tr>
+      </table>
+      <hr style="margin: 15px 0; border: none; border-top: 1px solid var(--border);">
+      <h3>🏆 Conquistas Recentes</h3>
+      <div id="achievPanel" style="font-size: 11px; margin-top: 10px; max-height: 200px; overflow-y: auto;">
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER -->
+  <div class="ct">
+    <div class="ct-inner">
+      <svg id="avatar" width="200" height="200" viewBox="0 0 200 200" style="margin-bottom: 20px;">
+        <circle cx="100" cy="80" r="45" fill="#f4d03f" stroke="#c8a050" stroke-width="2"/>
+        <circle cx="85" cy="70" r="8" fill="#000"/>
+        <circle cx="115" cy="70" r="8" fill="#000"/>
+        <path d="M 100 90 Q 95 100 100 105 Q 105 100 100 90" fill="#8b4513"/>
+      </svg>
+      <canvas id="hairCv" width="200" height="200" style="position: absolute; margin-top: -220px;"></canvas>
+      <button id="headBtn" class="head-btn">🧠 Click!</button>
+      <div id="comboDisp" style="margin-top: 10px; font-size: 14px; color: var(--gold);">Combo: 0x</div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="rp">
+    <div class="tab-header">
+      <button class="tab-btn active" data-tab="buildings">🏢 Prédios</button>
+      <button class="tab-btn" data-tab="upgrades">⬆️ Upgrades</button>
+      <button class="tab-btn" data-tab="prestige">✨ Prestigio</button>
+    </div>
+    <div class="tab-content active" id="buildings">
+      <!-- Populated by JS -->
+    </div>
+    <div class="tab-content" id="upgrades">
+      <!-- Populated by JS -->
+    </div>
+    <div class="tab-content" id="prestige">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- NEWS TICKER -->
+  <div class="nw">
+    <div class="news-ticker" id="newsTicker">
+      <!-- Scrolling news populated by JS -->
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <!-- ACHIEVEMENT POP -->
+  <div id="achievePop" class="popup" style="display: none;">
+    <div class="popup-content">
+      <button class="popup-close" onclick="document.getElementById('achievePop').style.display='none'">✕</button>
+      <h2>🏆 Nova Conquista!</h2>
+      <p id="achievePopMsg"></p>
+    </div>
+  </div>
+
+  <!-- EVENT POP -->
+  <div id="eventPop" class="popup" style="display: none;">
+    <div class="popup-content">
+      <button class="popup-close" onclick="document.getElementById('eventPop').style.display='none'">✕</button>
+      <h2 id="eventTitle">⚡ Evento!</h2>
+      <p id="eventMsg"></p>
+      <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <button id="eventBtn1" class="prestige-btn" style="flex: 1;"></button>
+        <button id="eventBtn2" class="prestige-btn" style="flex: 1;"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="bgAudio" src="musica.mp3" loop></audio>
+
+  <script src="script.js"></script>
+  <script src="audit.js"></script>
+
+</body>
+</html>
