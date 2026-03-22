@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>KARLAN CLICKER ∞</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<audio id="bgAudio" loop preload="auto"><source src="musica.mp3" type="audio/mpeg"><source src="musica.ogg" type="audio/ogg"></audio>
+<audio id="bgAudio" loop preload="auto"><source src="musica.mp3" type="audio/mpeg"></audio>
 <style>
 :root{
   --bg:#080608;--bg2:#0e0b0a;--panel:#100d08;--panel2:#181208;
@@ -20,40 +20,44 @@ body{font-family:'Share Tech Mono',monospace;font-size:17px;color:var(--text);
   display:grid;grid-template-rows:58px 1fr 26px;
   grid-template-columns:290px 1fr 330px;
   grid-template-areas:"tb tb tb""lp ct rp""nw nw nw";height:100vh}
-
-/* scanlines */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
   background:repeating-linear-gradient(0deg,rgba(0,0,0,.06) 0px,rgba(0,0,0,.06) 1px,transparent 1px,transparent 3px);
   mix-blend-mode:multiply}
-
 /* ══ TOP BAR ══ */
 #topbar{grid-area:tb;background:linear-gradient(180deg,#140f06 0%,#0c0904 100%);
-  border-bottom:2px solid var(--border2);
-  display:flex;align-items:center;gap:8px;padding:0 14px;overflow:hidden;
-  box-shadow:0 2px 18px rgba(0,0,0,.8)}
-.tb-logo{font-family:'Bebas Neue';font-size:26px;color:var(--gold2);letter-spacing:4px;
+  border-bottom:2px solid var(--border2);display:flex;align-items:center;gap:6px;
+  padding:0 10px;overflow:hidden;box-shadow:0 2px 18px rgba(0,0,0,.8);transition:border-bottom-color .4s}
+.tb-logo{font-family:'Bebas Neue';font-size:24px;color:var(--gold2);letter-spacing:3px;
   white-space:nowrap;flex-shrink:0;text-shadow:0 0 20px #c8962a88}
 .tb-divider{width:1px;height:38px;background:var(--border2);flex-shrink:0}
 .tb-stat{display:flex;flex-direction:column;align-items:center;white-space:nowrap;
   background:rgba(255,200,60,.04);border:1px solid var(--border2);
-  border-radius:4px;padding:4px 12px;flex-shrink:0}
-.tb-val{font-size:22px;color:var(--gold2);line-height:1;font-family:'Bebas Neue'}
+  border-radius:4px;padding:3px 8px;flex-shrink:0}
+.tb-val{font-size:20px;color:var(--gold2);line-height:1;font-family:'Bebas Neue'}
 .tb-lbl{font-size:9px;color:var(--dim);letter-spacing:2px;margin-top:1px}
 .tb-caspa{display:none}
-#forcaBar{flex:1;max-width:200px;display:flex;flex-direction:column;gap:3px}
-#forcaLabel{font-size:10px;color:var(--cyan2);letter-spacing:2px}
-.forca-rail{height:6px;background:rgba(34,221,204,.12);border-radius:3px;overflow:hidden;border:1px solid rgba(34,221,204,.2)}
-.forca-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--cyan2));border-radius:3px;transition:width .5s}
+#forcaBar{flex:1;max-width:160px;display:flex;flex-direction:column;gap:3px}
+#forcaLabel{font-size:9px;color:var(--cyan2);letter-spacing:1px}
+.forca-rail{height:5px;background:rgba(34,221,204,.12);border-radius:3px;overflow:hidden;border:1px solid rgba(34,221,204,.2)}
+.forca-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--cyan2));border-radius:3px;transition:width .6s}
 .tb-btn{background:none;border:1px solid var(--border2);border-radius:3px;
-  color:var(--dim);font-family:'VT323';font-size:16px;padding:3px 9px;
+  color:var(--dim);font-family:'VT323';font-size:15px;padding:2px 7px;
   cursor:pointer;white-space:nowrap;transition:.2s;flex-shrink:0}
 .tb-btn:hover{color:var(--gold2);border-color:var(--gold3)}
 .tb-btn.active-mult{color:var(--gold2);border-color:var(--gold);background:rgba(200,150,42,.12)}
 #goldenTimer{display:none;background:rgba(255,200,0,.1);border:1px solid #ffd700;
-  border-radius:4px;padding:3px 10px;font-size:13px;color:#ffd700;
+  border-radius:4px;padding:2px 8px;font-size:12px;color:#ffd700;
   animation:goldenPulse .5s ease-in-out infinite alternate;flex-shrink:0}
 @keyframes goldenPulse{from{box-shadow:0 0 6px #ffd70066}to{box-shadow:0 0 18px #ffd700aa}}
-
+/* ══ TOPBAR USER ══ */
+#userDisplay{font-size:11px;color:var(--dim);letter-spacing:1px;cursor:pointer;
+  padding:3px 8px;border:1px solid var(--border);border-radius:3px;
+  transition:.2s;white-space:nowrap;flex-shrink:0;font-family:'Share Tech Mono'}
+#userDisplay:hover{color:var(--gold2);border-color:var(--gold3)}
+.tb-rank-btn{background:rgba(255,200,0,.08);border:1px solid var(--gold3);border-radius:3px;
+  color:var(--gold3);font-family:'Bebas Neue';font-size:13px;letter-spacing:1px;
+  padding:2px 8px;cursor:pointer;transition:.2s;flex-shrink:0}
+.tb-rank-btn:hover{color:var(--gold2);background:rgba(255,200,0,.15)}
 /* ══ LEFT PANEL ══ */
 #leftPanel{grid-area:lp;border-right:2px solid var(--border);
   overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;
@@ -61,19 +65,18 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
 .pnl-title{font-family:'Bebas Neue';font-size:16px;color:var(--gold3);
   letter-spacing:3px;border-bottom:1px solid var(--border);padding-bottom:3px}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.sbox{background:var(--panel);border:1px solid var(--border);border-radius:3px;
-  padding:4px 6px;text-align:center;transition:.3s}
+.sbox{background:var(--panel);border:1px solid var(--border);border-radius:3px;padding:4px 6px;text-align:center;transition:.3s}
 .sbox:hover{border-color:var(--border2)}
 .sval{font-size:17px;color:var(--gold2);display:block;line-height:1.1;font-family:'Bebas Neue'}
 .slbl{font-size:9px;color:var(--dim);letter-spacing:1px;display:block}
 .bald-wrap{display:flex;flex-direction:column;gap:3px}
 .bald-lbl{font-size:12px;color:var(--dim);letter-spacing:2px;text-align:center}
 .bald-bar{height:10px;background:#0d0a04;border-radius:2px;overflow:hidden;border:1px solid var(--border)}
-.bald-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#185a00,#e07020,#ff1800);transition:width .3s}
+.bald-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#185a00,#e07020,#ff1800);transition:width .4s}
 .combo-wrap{display:none;flex-direction:column;gap:2px}
 .combo-lbl{font-size:11px;color:var(--cyan2);letter-spacing:2px;text-align:center}
 .combo-bar{height:7px;background:rgba(34,221,204,.08);border-radius:2px;border:1px solid rgba(34,221,204,.2);overflow:hidden}
-.combo-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--cyan),var(--cyan2));transition:width .1s}
+.combo-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--cyan),var(--cyan2));transition:width .08s linear}
 #eventBox{display:none;background:rgba(192,40,8,.08);border:1px solid var(--red);
   border-radius:3px;padding:6px;font-size:12px;animation:eventBlink 1s ease-in-out infinite alternate}
 @keyframes eventBlink{from{border-color:var(--red)}to{border-color:var(--red2);box-shadow:0 0 8px rgba(255,68,34,.3)}}
@@ -86,20 +89,14 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
 .ach-ic{font-size:16px;flex-shrink:0}
 .at{display:block;color:var(--gold2)}
 .ad{display:block;font-size:10px;color:var(--dim)}
-#statsPanel{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted)}
-.stat-row{display:flex;justify-content:space-between}
-.stat-row span:last-child{color:var(--text)}
-
 /* ══ CENTER ══ */
 #centerPanel{grid-area:ct;display:flex;flex-direction:column;align-items:center;
   justify-content:center;position:relative;overflow:hidden;gap:6px}
 #centerPanel::before{content:'';position:absolute;inset:0;
   background:radial-gradient(ellipse 80% 80% at 50% 45%,rgba(200,150,42,.06) 0%,transparent 65%);
   pointer-events:none}
-#hairCanvas{position:absolute;inset:0;pointer-events:none;z-index:3}
-/* golden fio */
-#goldenFio{display:none;position:absolute;z-index:20;cursor:pointer;
-  user-select:none;-webkit-tap-highlight-color:transparent}
+#hairCanvas{position:absolute;inset:0;pointer-events:none;z-index:3;will-change:transform}
+#goldenFio{display:none;position:absolute;z-index:20;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
 .gf-inner{position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center}
 .gf-ring{position:absolute;inset:0;border-radius:50%;border:3px solid #ffd700;
   animation:gfSpin 4s linear infinite;box-shadow:0 0 15px #ffd70066,inset 0 0 15px rgba(255,215,0,.1)}
@@ -108,80 +105,54 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
 .gf-icon{font-size:30px;animation:gfBob .8s ease-in-out infinite alternate;
   filter:drop-shadow(0 0 8px #ffd700) drop-shadow(0 0 16px #ffaa00)}
 @keyframes gfBob{from{transform:translateY(-3px) rotate(-8deg)}to{transform:translateY(3px) rotate(8deg)}}
-.gf-countdown{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
-  font-size:10px;color:#ffd700;white-space:nowrap;font-family:'VT323'}
-/* head button */
+.gf-countdown{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:10px;color:#ffd700;white-space:nowrap;font-family:'VT323'}
 #headBtn{background:none;border:none;cursor:pointer;position:relative;z-index:2;
-  filter:drop-shadow(0 0 22px rgba(200,150,42,.4));
-  transition:filter .15s;user-select:none;-webkit-tap-highlight-color:transparent}
+  filter:drop-shadow(0 0 22px rgba(200,150,42,.4));transition:filter .15s;user-select:none;-webkit-tap-highlight-color:transparent}
 #headBtn:hover{filter:drop-shadow(0 0 40px rgba(200,150,42,.7))}
 #headBtn.pop{animation:popA .13s ease-out}
 @keyframes popA{0%{transform:scale(1)}50%{transform:scale(1.1) rotate(2deg)}100%{transform:scale(1)}}
-#stageLabel{font-family:'Bebas Neue';font-size:24px;color:var(--dim);letter-spacing:4px;
-  z-index:2;transition:color 2s;text-align:center}
+#stageLabel{font-family:'Bebas Neue';font-size:24px;color:var(--dim);letter-spacing:4px;z-index:2;transition:color 2s;text-align:center}
 #clickLabel{font-size:13px;color:var(--gold3);letter-spacing:2px;z-index:2}
 #comboInline{color:var(--cyan2);display:none;animation:comboPulse .4s ease-in-out infinite alternate}
 @keyframes comboPulse{from{opacity:.7}to{opacity:1}}
-#forcaCapilarDisplay{font-size:12px;color:var(--cyan2);letter-spacing:2px;z-index:2;
-  display:none;animation:comboPulse 2s ease-in-out infinite alternate}
-.float-fio{position:absolute;z-index:10;pointer-events:none;font-family:'VT323';
-  font-size:24px;font-weight:bold;animation:floatU .9s ease-out forwards}
+#comboInline.max{color:#ff6600;animation:comboMaxPulse .25s ease-in-out infinite alternate;text-shadow:0 0 10px #ff660088}
+@keyframes comboMaxPulse{from{opacity:.8;transform:scale(1)}to{opacity:1;transform:scale(1.08)}}
+#forcaCapilarDisplay{font-size:12px;color:var(--cyan2);letter-spacing:2px;z-index:2;display:none;animation:comboPulse 2s ease-in-out infinite alternate}
+.float-fio{position:absolute;z-index:10;pointer-events:none;font-family:'VT323';font-size:24px;font-weight:bold;animation:floatU .9s ease-out forwards}
 @keyframes floatU{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-70px) scale(.6)}}
-/* flash overlay */
-#flashOverlay{position:fixed;inset:0;pointer-events:none;z-index:9997;opacity:0;
-  background:radial-gradient(ellipse at center,rgba(255,215,0,.25) 0%,transparent 70%);
-  transition:opacity .15s}
-
+#flashOverlay{position:fixed;inset:0;pointer-events:none;z-index:9997;opacity:0;transition:opacity .15s}
 /* ══ RIGHT PANEL ══ */
-#rightPanel{grid-area:rp;border-left:2px solid var(--border);
-  overflow-y:auto;display:flex;flex-direction:column;
+#rightPanel{grid-area:rp;border-left:2px solid var(--border);overflow-y:auto;display:flex;flex-direction:column;
   background:linear-gradient(180deg,var(--panel2) 0%,var(--bg2) 100%)}
 .tabs{display:flex;border-bottom:2px solid var(--border);flex-shrink:0;background:var(--panel)}
 .tab-btn{flex:1;background:none;border:none;border-right:1px solid var(--border);
   color:var(--dim);font-family:'Bebas Neue';font-size:12px;letter-spacing:1px;
   padding:8px 2px;cursor:pointer;transition:.2s}
 .tab-btn:last-child{border-right:none}
-.tab-btn.active{color:var(--gold2);background:rgba(200,150,42,.07);
-  border-bottom:2px solid var(--gold);margin-bottom:-2px}
+.tab-btn.active{color:var(--gold2);background:rgba(200,150,42,.07);border-bottom:2px solid var(--gold);margin-bottom:-2px}
 .tab-btn:hover:not(.active){color:var(--text);background:rgba(255,255,255,.03)}
 .tab-content{display:none;padding:8px;flex:1;overflow-y:auto}
 .tab-content.active{display:block}
-
-/* buy multiplier */
 .buy-mult-row{display:flex;gap:4px;margin-bottom:8px;align-items:center}
 .buy-mult-label{font-size:11px;color:var(--dim);letter-spacing:1px;flex:1}
-.mult-btn{background:var(--panel);border:1px solid var(--border);border-radius:3px;
-  color:var(--dim);font-family:'VT323';font-size:15px;padding:2px 8px;
-  cursor:pointer;transition:.2s}
+.mult-btn{background:var(--panel);border:1px solid var(--border);border-radius:3px;color:var(--dim);font-family:'VT323';font-size:15px;padding:2px 8px;cursor:pointer;transition:.2s}
 .mult-btn:hover,.mult-btn.active{color:var(--gold2);border-color:var(--gold3);background:rgba(200,150,42,.1)}
-
-/* shop items */
-.shop-cat{font-family:'Bebas Neue';font-size:14px;color:var(--gold3);
-  letter-spacing:3px;margin:8px 0 4px;padding-bottom:2px;border-bottom:1px solid var(--border)}
-.bld-item{background:var(--panel);border:1px solid var(--border);border-radius:4px;
-  padding:7px 9px;cursor:pointer;width:100%;text-align:left;transition:.18s;
-  margin-bottom:5px;position:relative;overflow:hidden}
-.bld-item:hover:not(.locked){border-color:var(--border2);background:var(--panel2);
-  box-shadow:0 0 10px rgba(200,150,42,.1)}
+.shop-cat{font-family:'Bebas Neue';font-size:14px;color:var(--gold3);letter-spacing:3px;margin:8px 0 4px;padding-bottom:2px;border-bottom:1px solid var(--border)}
+.bld-item{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:7px 9px;cursor:pointer;width:100%;text-align:left;transition:.18s;margin-bottom:5px;position:relative;overflow:hidden}
+.bld-item:hover:not(.locked){border-color:var(--border2);background:var(--panel2);box-shadow:0 0 10px rgba(200,150,42,.1)}
 .bld-item.locked{opacity:.22;cursor:not-allowed}
 .bld-item.can-buy{border-color:var(--gold3);box-shadow:0 0 8px rgba(200,150,42,.15)}
-.bld-item.can-buy::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(200,150,42,.06));pointer-events:none}
-/* production micro-bar on building item */
-.bld-prod-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--green2);
-  transition:width 1s linear;opacity:.6}
+.bld-item.can-buy::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(200,150,42,.06));pointer-events:none}
+.bld-prod-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--green2);transition:width 1s linear;opacity:.6}
 .bld-top{display:flex;justify-content:space-between;align-items:center;gap:4px}
 .bld-name{font-family:'Bebas Neue';font-size:14px;color:var(--bright);letter-spacing:.5px}
-.bld-owned{font-size:12px;color:var(--gold3);background:rgba(200,150,42,.12);
-  border-radius:2px;padding:1px 6px;border:1px solid var(--border2)}
+.bld-owned{font-size:12px;color:var(--gold3);background:rgba(200,150,42,.12);border-radius:2px;padding:1px 6px;border:1px solid var(--border2)}
 .bld-row2{display:flex;justify-content:space-between;align-items:baseline;gap:4px;margin-top:2px}
 .bld-desc{font-size:10px;color:var(--dim);flex:1}
 .bld-ps{font-size:10px;color:var(--green2)}
 .bld-cost{font-size:13px;font-family:'Bebas Neue'}
 .bld-cost.ok{color:var(--gold)}.bld-cost.no{color:var(--red2)}
-
-.upg-item{background:var(--panel);border:1px solid var(--border);border-radius:4px;
-  padding:5px 8px;cursor:pointer;width:100%;text-align:left;transition:.18s;margin-bottom:4px}
+.upg-item{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:5px 8px;cursor:pointer;width:100%;text-align:left;transition:.18s;margin-bottom:4px}
 .upg-item:hover:not(.locked):not(.bought){border-color:var(--border2);background:var(--panel2)}
 .upg-item.locked{opacity:.18;cursor:not-allowed}
 .upg-item.bought{opacity:.32;cursor:default}
@@ -193,13 +164,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
 .upg-eff{font-size:10px;color:var(--green2);margin-top:1px}
 .upg-cost{font-size:12px;margin-top:2px}
 .upg-cost.ok{color:var(--gold)}.upg-cost.no{color:var(--red2)}
-
-/* prestige */
-.caspa-card{background:rgba(106,24,128,.1);border:1px solid rgba(106,24,128,.5);
-  border-radius:4px;padding:9px;margin-bottom:8px;font-size:12px;line-height:1.5}
+.caspa-card{background:rgba(106,24,128,.1);border:1px solid rgba(106,24,128,.5);border-radius:4px;padding:9px;margin-bottom:8px;font-size:12px;line-height:1.5}
 .caspa-big{font-family:'Bebas Neue';font-size:30px;color:#d080f0;display:block}
-.caspa-upg{background:var(--panel);border:1px solid rgba(80,20,100,.5);border-radius:4px;
-  padding:6px 9px;cursor:pointer;width:100%;text-align:left;transition:.18s;margin-bottom:5px}
+.caspa-upg{background:var(--panel);border:1px solid rgba(80,20,100,.5);border-radius:4px;padding:6px 9px;cursor:pointer;width:100%;text-align:left;transition:.18s;margin-bottom:5px}
 .caspa-upg:hover:not(.bought):not(.locked){border-color:#802080;background:rgba(80,20,100,.15)}
 .caspa-upg.bought{opacity:.35;cursor:default}
 .caspa-upg.locked{opacity:.2;cursor:not-allowed}
@@ -207,34 +174,26 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
 .cu-desc{font-size:10px;color:var(--dim);margin-top:1px}
 .cu-eff{font-size:10px;color:#a060d8;margin-top:1px}
 .cu-cost{font-size:11px;color:#7030a0;margin-top:2px}.cu-cost.ok{color:#d080f0}
-.prestige-btn{width:100%;background:rgba(80,10,100,.2);border:2px solid #502060;
-  border-radius:4px;color:#e090f0;font-family:'Bebas Neue';font-size:18px;
-  letter-spacing:3px;padding:10px;cursor:pointer;transition:.2s;margin-top:8px}
+.prestige-btn{width:100%;background:rgba(80,10,100,.2);border:2px solid #502060;border-radius:4px;color:#e090f0;font-family:'Bebas Neue';font-size:18px;letter-spacing:3px;padding:10px;cursor:pointer;transition:.2s;margin-top:8px}
 .prestige-btn:hover:not(:disabled){background:rgba(120,20,160,.3);border-color:#9040c0}
 .prestige-btn:disabled{opacity:.3;cursor:not-allowed}
-
-/* stats tab */
 .stats-section{margin-bottom:12px}
 .stats-title{font-family:'Bebas Neue';font-size:14px;color:var(--gold3);letter-spacing:2px;margin-bottom:4px}
-.stats-row{display:flex;justify-content:space-between;padding:2px 0;
-  border-bottom:1px solid rgba(50,30,10,.5);font-size:11px}
+.stats-row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid rgba(50,30,10,.5);font-size:11px}
 .stats-row span:first-child{color:var(--dim)}
 .stats-row span:last-child{color:var(--text)}
-
-/* news */
-#newsTicker{grid-area:nw;background:#060408;border-top:1px solid var(--border);
-  display:flex;align-items:center;overflow:hidden;padding:0 10px;font-size:12px;color:var(--dim)}
+/* ══ NEWS ══ */
+#newsTicker{grid-area:nw;background:#060408;border-top:1px solid var(--border);display:flex;align-items:center;overflow:hidden;padding:0 10px;font-size:12px;color:var(--dim)}
 #newsText{white-space:nowrap;animation:newsScroll 45s linear infinite}
 @keyframes newsScroll{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
-
-/* popups */
+/* ══ POPUPS ══ */
 #toast{position:fixed;top:64px;left:50%;transform:translateX(-50%) scale(.8);
   background:linear-gradient(135deg,#201808,#281c08);border:1px solid var(--gold3);
   border-radius:4px;padding:7px 18px;font-size:14px;color:var(--gold2);
-  z-index:1000;pointer-events:none;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap}
+  z-index:8000;pointer-events:none;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) scale(1)}
 #achPopup{position:fixed;top:64px;right:14px;background:linear-gradient(135deg,#1c1406,#241a08);
-  border:1px solid var(--gold);border-radius:4px;padding:9px 12px;z-index:1001;
+  border:1px solid var(--gold);border-radius:4px;padding:9px 12px;z-index:7001;
   pointer-events:none;opacity:0;transition:opacity .3s,transform .3s;
   transform:translateX(20px);max-width:250px;box-shadow:0 0 20px rgba(200,150,42,.2)}
 #achPopup.show{opacity:1;transform:translateX(0)}
@@ -243,50 +202,91 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
 .ap-icon{font-size:24px}
 .ap-nm{font-size:16px;color:var(--gold2);display:block;font-family:'Bebas Neue'}
 .ap-ds{font-size:10px;color:var(--dim);display:block}
-#eventPopup{position:fixed;bottom:36px;left:50%;
-  transform:translateX(-50%) translateY(18px);
+#eventPopup{position:fixed;bottom:36px;left:50%;transform:translateX(-50%) translateY(18px);
   background:linear-gradient(135deg,#1a0402,#220804);border:2px solid var(--red);
-  border-radius:5px;padding:10px 18px;text-align:center;z-index:1002;
-  pointer-events:none;opacity:0;transition:opacity .4s,transform .4s;
-  box-shadow:0 0 25px rgba(192,40,8,.4)}
+  border-radius:5px;padding:10px 18px;text-align:center;z-index:7002;
+  pointer-events:none;opacity:0;transition:opacity .4s,transform .4s;box-shadow:0 0 25px rgba(192,40,8,.4)}
 #eventPopup.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .ep-name{font-family:'Bebas Neue';font-size:20px;color:var(--red2);letter-spacing:2px}
-.ep-desc{font-size:13px;color:var(--text)}
-/* golden fio popup */
 #gfPopup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.5);
   background:linear-gradient(135deg,#1a1200,#2a1e00);border:2px solid #ffd700;
-  border-radius:6px;padding:14px 24px;text-align:center;z-index:2000;
-  pointer-events:none;opacity:0;transition:opacity .3s,transform .3s;
-  box-shadow:0 0 40px rgba(255,215,0,.5)}
+  border-radius:6px;padding:14px 24px;text-align:center;z-index:7003;
+  pointer-events:none;opacity:0;transition:opacity .3s,transform .3s;box-shadow:0 0 40px rgba(255,215,0,.5)}
 #gfPopup.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .gf-popup-name{font-family:'Bebas Neue';font-size:28px;color:#ffd700;letter-spacing:3px}
 .gf-popup-val{font-family:'Bebas Neue';font-size:20px;color:var(--gold2);margin-top:2px}
-
-/* brutal */
-#brutal{display:none;position:fixed;inset:0;z-index:3000;
+/* ══ BRUTAL ══ */
+#brutal{display:none;position:fixed;inset:0;z-index:9500;
   background:radial-gradient(ellipse 90% 70% at 50% 50%,rgba(140,0,0,.8),rgba(4,2,0,.96) 72%);
   flex-direction:column;align-items:center;justify-content:center;gap:6px}
-.br1{font-family:'Bebas Neue';font-size:clamp(68px,14vw,200px);color:#ff2200;
-  letter-spacing:.07em;line-height:.86;animation:brP 1.5s ease-in-out infinite alternate;
-  text-shadow:0 0 40px #ff2200,0 0 100px #ff220033,6px 6px 0 #6a0000}
+.br1{font-family:'Bebas Neue';font-size:clamp(68px,14vw,200px);color:#ff2200;letter-spacing:.07em;line-height:.86;animation:brP 1.5s ease-in-out infinite alternate;text-shadow:0 0 40px #ff2200,0 0 100px #ff220033,6px 6px 0 #6a0000}
 @keyframes brP{to{text-shadow:0 0 80px #ff2200,0 0 180px #ff220088,6px 6px 0 #8a0000;filter:brightness(1.2)}}
-.br2{font-family:'Bebas Neue';font-size:clamp(18px,4.5vw,62px);color:#f0e0a0;
-  letter-spacing:.2em;text-shadow:0 0 20px #f0e0a0aa,3px 3px 0 #5a3a00;
-  animation:slideUp .5s cubic-bezier(.22,1,.36,1) .6s both}
-@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.br2{font-family:'Bebas Neue';font-size:clamp(18px,4.5vw,62px);color:#f0e0a0;letter-spacing:.2em;text-shadow:0 0 20px #f0e0a0aa,3px 3px 0 #5a3a00}
 .br3{font-size:15px;color:var(--dim);letter-spacing:2px}
 .br4{font-size:12px;color:#444;max-width:520px;text-align:center}
-.br-restart{margin-top:12px;font-family:'Bebas Neue';font-size:22px;letter-spacing:3px;
-  color:#0a0604;background:var(--gold2);border:none;border-radius:4px;
-  padding:8px 28px;cursor:pointer;transition:.2s}
+.br-restart{margin-top:12px;font-family:'Bebas Neue';font-size:22px;letter-spacing:3px;color:#0a0604;background:var(--gold2);border:none;border-radius:4px;padding:8px 28px;cursor:pointer;transition:.2s}
 .br-restart:hover{background:var(--gold4)}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+/* ══ MODAIS ══ */
+.k-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9000;
+  display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.k-modal.hidden{display:none!important}
+.k-box{background:linear-gradient(135deg,#100c04,#1a1308);border:2px solid var(--gold3);
+  border-radius:8px;padding:28px 24px;width:90vw;max-width:400px;
+  box-shadow:0 0 60px rgba(200,150,42,.2);display:flex;flex-direction:column;gap:10px}
+.k-logo{font-family:'Bebas Neue';font-size:26px;color:var(--gold2);letter-spacing:4px;text-align:center;text-shadow:0 0 20px #c8962a66}
+.k-sub{font-family:'Bebas Neue';font-size:16px;color:var(--gold3);letter-spacing:3px;text-align:center}
+.k-inp{background:#060402;border:1px solid var(--border2);border-radius:4px;
+  color:var(--text);font-family:'Share Tech Mono';font-size:14px;padding:8px 12px;
+  width:100%;outline:none;transition:.2s;letter-spacing:1px}
+.k-inp:focus{border-color:var(--gold3);box-shadow:0 0 8px rgba(200,150,42,.2)}
+.k-err{font-size:12px;color:var(--red2);min-height:16px;text-align:center}
+.k-btn{font-family:'Bebas Neue';font-size:17px;letter-spacing:2px;border:none;
+  border-radius:4px;padding:9px;cursor:pointer;width:100%;transition:.2s}
+.k-primary{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0604}
+.k-primary:hover{background:linear-gradient(135deg,var(--gold),var(--gold2))}
+.k-ghost{background:transparent;border:1px solid var(--border2);color:var(--dim);
+  font-family:'Share Tech Mono';font-size:12px;padding:7px;border-radius:4px;
+  cursor:pointer;width:100%;transition:.2s;letter-spacing:1px}
+.k-ghost:hover{color:var(--text);border-color:var(--dim)}
+.k-switch{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--dim)}
+.k-link{background:none;border:none;color:var(--gold3);font-family:'Bebas Neue';font-size:14px;cursor:pointer;letter-spacing:1px}
+.k-link:hover{color:var(--gold2)}
+.k-hr{border:none;border-top:1px solid var(--border);margin:2px 0}
+/* ══ LEADERBOARD ══ */
+.lb-box{max-width:640px;width:94vw}
+.lb-table{width:100%;border-collapse:collapse;font-size:12px}
+.lb-table th{font-family:'Bebas Neue';font-size:11px;color:var(--gold3);letter-spacing:2px;
+  padding:6px 8px;border-bottom:1px solid var(--border2);text-align:left;white-space:nowrap}
+.lb-table td{padding:5px 8px;border-bottom:1px solid var(--border);color:var(--text);white-space:nowrap}
+.lb-table tr:hover td{background:rgba(200,150,42,.04)}
+.lb-me td{color:var(--gold2)!important;font-weight:bold;background:rgba(200,150,42,.07)!important}
+.lb-scroll{overflow-y:auto;max-height:52vh;margin-top:6px}
+.lb-rank-info{font-size:11px;color:var(--dim);text-align:center;margin-top:4px}
+/* ══ CAIO OVERLAY ══ */
+#caioOverlay{position:fixed;right:0;bottom:28px;z-index:8500;pointer-events:none;
+  transform:translateX(240px);transition:transform 1s cubic-bezier(.22,1,.36,1)}
+#caioOverlay.show{transform:translateX(0)}
+#caioBubble{position:absolute;right:142px;bottom:192px;
+  background:rgba(4,24,10,.95);border:2px solid #44dd88;border-radius:10px;
+  padding:7px 11px;font-size:11px;color:#88ffbb;white-space:nowrap;
+  box-shadow:0 0 20px rgba(68,221,136,.3);font-family:'Share Tech Mono';line-height:1.4}
+#caioBubble::after{content:'';position:absolute;right:-12px;bottom:18px;
+  border:6px solid transparent;border-left-color:#44dd88}
+#caioHint{position:absolute;right:142px;bottom:162px;font-family:'Bebas Neue';
+  font-size:14px;color:#44ff88;letter-spacing:2px;
+  text-shadow:0 0 10px #44ff8877;display:none;animation:caioPulse .5s ease-in-out infinite alternate}
+@keyframes caioPulse{from{opacity:.7}to{opacity:1}}
+#caioTimerTxt{position:absolute;right:148px;bottom:144px;font-size:10px;color:#226644;letter-spacing:1px}
+/* ══ PRESTIGE FLASH ══ */
+#prestigeFlash{position:fixed;inset:0;pointer-events:none;z-index:9996;opacity:0;
+  background:radial-gradient(ellipse at center,rgba(180,60,255,.55) 0%,transparent 70%);
+  transition:opacity .25s}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 </style>
 </head>
 <body oncontextmenu="return false">
 <div id="flashOverlay"></div>
+<div id="prestigeFlash"></div>
 
 <!-- TOP BAR -->
 <header id="topbar">
@@ -295,10 +295,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
   <div class="tb-stat"><span class="tb-val" id="tbFios">0</span><span class="tb-lbl">FIOS</span></div>
   <div class="tb-stat"><span class="tb-val" id="tbPs">0/s</span><span class="tb-lbl">PROD</span></div>
   <div class="tb-stat tb-caspa" id="caspaStat"><span class="tb-val" style="color:#d080f0" id="tbCaspa">0</span><span class="tb-lbl">CASPA</span></div>
-  <div id="forcaBar"><div id="forcaLabel">FORÇA CAPILAR: 0%</div><div class="forca-rail"><div class="forca-fill" id="forcaFill" style="width:0%"></div></div></div>
-  <div id="goldenTimer">🌟 FIO DOURADO!</div>
+  <div id="forcaBar"><div id="forcaLabel">FORÇA: 0%</div><div class="forca-rail"><div class="forca-fill" id="forcaFill" style="width:0%"></div></div></div>
+  <div id="goldenTimer">🌟</div>
   <div style="flex:1"></div>
-  <span style="font-size:10px;color:var(--dim);letter-spacing:1px;margin-right:4px">COMPRAR:</span>
+  <button class="tb-rank-btn" onclick="showLeaderboard()">🏆 TOP 100</button>
+  <div id="userDisplay" onclick="onUserClick()">👤 GUEST</div>
+  <div class="tb-divider"></div>
   <button class="tb-btn active-mult" id="m1" onclick="setBuyMult(1)">×1</button>
   <button class="tb-btn" id="m10" onclick="setBuyMult(10)">×10</button>
   <button class="tb-btn" id="m100" onclick="setBuyMult(100)">×100</button>
@@ -339,20 +341,16 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
 <!-- CENTER -->
 <main id="centerPanel">
   <canvas id="hairCanvas"></canvas>
-  <!-- Golden Fio -->
-  <div id="goldenFio" onclick="clickGoldenFio()">
+  <div id="goldenFio">
     <div class="gf-inner">
-      <div class="gf-ring"></div>
-      <div class="gf-ring gf-ring2"></div>
+      <div class="gf-ring"></div><div class="gf-ring gf-ring2"></div>
       <span class="gf-icon">🌟</span>
     </div>
     <div class="gf-countdown" id="gfCountdown">13s</div>
   </div>
-
   <div id="stageLabel">FASE I — CABELO COMPLETO</div>
   <button id="headBtn">
     <svg width="240" height="282" viewBox="0 0 260 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- gravata professor -->
       <rect x="106" y="256" width="48" height="28" rx="4" fill="#0e0e5a"/>
       <path d="M116 256 L130 281 L144 256Z" fill="#1818aa"/>
       <path d="M119 256 L130 273 L141 256Z" fill="#2828cc"/>
@@ -363,99 +361,34 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
       <ellipse cx="232" cy="163" rx="22" ry="30" fill="#d4956a"/>
       <ellipse cx="230" cy="163" rx="13" ry="20" fill="#c07858"/>
       <ellipse cx="130" cy="138" rx="102" ry="120" fill="url(#sG)"/>
-      <!-- HAIR STAGES -->
-      <g id="hs0">
-        <ellipse cx="130" cy="60" rx="100" ry="52" fill="#2a1505"/>
-        <path d="M30 98 Q28 38 130 18 Q232 38 230 98 Q200 56 130 51 Q60 56 30 98Z" fill="#3a1e08"/>
-        <path d="M108 44 Q118-20 130-24 Q142-20 152 44 Q140 26 130 24 Q120 26 108 44Z" fill="#2a1505"/>
-        <path d="M33 106 Q15 63 28 42 Q43 70 33 106Z" fill="#3a1e08"/>
-        <path d="M227 106 Q245 63 232 42 Q217 70 227 106Z" fill="#3a1e08"/>
-        <path d="M66 64 Q52 26 70 4 Q77 30 66 64Z" fill="#4a2810"/>
-        <path d="M93 46 Q88 6 106-8 Q109 20 93 46Z" fill="#4a2810"/>
-        <path d="M130 41 Q127 1 144-11 Q143 18 130 41Z" fill="#4a2810"/>
-        <path d="M163 46 Q164 6 177-3 Q175 24 163 46Z" fill="#4a2810"/>
-        <path d="M187 64 Q199 24 209 14 Q205 42 187 64Z" fill="#4a2810"/>
-      </g>
-      <g id="hs1" opacity="0">
-        <ellipse cx="130" cy="62" rx="95" ry="48" fill="#2a1505"/>
-        <path d="M42 106 Q35 50 130 22 Q225 50 218 106 Q195 62 130 56 Q65 62 42 106Z" fill="#3a1e08"/>
-        <path d="M114 50 Q122-12 130-16 Q138-12 146 50 Q138 32 130 30 Q122 32 114 50Z" fill="#2a1505"/>
-        <path d="M45 110 Q30 70 40 50 Q52 76 45 110Z" fill="#3a1e08"/>
-        <path d="M215 110 Q230 70 220 50 Q208 76 215 110Z" fill="#3a1e08"/>
-        <path d="M80 68 Q70 36 84 16 Q90 38 80 68Z" fill="#4a2810" opacity=".75"/>
-        <path d="M130 48 Q128 12 142 0 Q141 24 130 48Z" fill="#4a2810" opacity=".75"/>
-        <path d="M178 68 Q186 34 196 26 Q192 48 178 68Z" fill="#4a2810" opacity=".75"/>
-      </g>
-      <g id="hs2" opacity="0">
-        <path d="M62 116 Q55 70 130 28 Q205 70 198 116 Q182 76 130 70 Q78 76 62 116Z" fill="#2a1505"/>
-        <path d="M62 116 Q45 88 52 66 Q68 90 62 116Z" fill="#3a1e08"/>
-        <path d="M198 116 Q215 88 208 66 Q192 90 198 116Z" fill="#3a1e08"/>
-        <path d="M120 60 Q126 22 130 18 Q134 22 140 60 Q135 44 130 42 Q125 44 120 60Z" fill="#2a1505" opacity=".65"/>
-        <ellipse cx="130" cy="70" rx="22" ry="14" fill="#d4956a" opacity=".4"/>
-        <circle cx="110" cy="78" r="2" fill="#ffe0c8" opacity=".55"/>
-        <circle cx="130" cy="65" r="2.5" fill="#ffe0c8" opacity=".65"/>
-        <circle cx="150" cy="78" r="2" fill="#ffe0c8" opacity=".55"/>
-      </g>
-      <g id="hs3" opacity="0">
-        <path d="M30 198 Q22 143 35 103 Q55 98 72 123 Q58 138 55 173 Q48 188 30 198Z" fill="#2a1505"/>
-        <path d="M230 198 Q238 143 225 103 Q205 98 188 123 Q202 138 205 173 Q212 188 230 198Z" fill="#2a1505"/>
-        <path d="M55 173 Q40 196 60 213 Q90 223 130 223 Q170 223 200 213 Q220 196 205 173 Q180 193 130 195 Q80 193 55 173Z" fill="#2a1505" opacity=".65"/>
-        <path d="M126 70 Q128 50 130 46 Q132 50 134 70" stroke="#3a1e08" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M118 74 Q121 56 123 52" stroke="#3a1e08" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55"/>
-        <path d="M142 74 Q139 56 137 52" stroke="#3a1e08" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55"/>
-      </g>
-      <g id="hs4" opacity="0">
-        <path d="M40 156 Q36 128 44 110 Q52 128 52 156Z" fill="#2a1505" opacity=".75"/>
-        <path d="M220 156 Q224 128 216 110 Q208 128 208 156Z" fill="#2a1505" opacity=".75"/>
-        <path id="lastHair" d="M130 66 Q131 48 130 40 Q129 48 130 66" stroke="#3a1e08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      </g>
-      <g id="hs5" opacity="0">
-        <ellipse cx="104" cy="66" rx="30" ry="14" fill="rgba(255,255,200,.22)" transform="rotate(-15 104 66)"/>
-        <ellipse cx="107" cy="63" rx="16" ry="7" fill="rgba(255,255,220,.32)" transform="rotate(-15 107 63)"/>
-        <ellipse cx="145" cy="73" rx="18" ry="8" fill="rgba(255,255,200,.15)" transform="rotate(10 145 73)"/>
-      </g>
+      <g id="hs0"><ellipse cx="130" cy="60" rx="100" ry="52" fill="#2a1505"/><path d="M30 98 Q28 38 130 18 Q232 38 230 98 Q200 56 130 51 Q60 56 30 98Z" fill="#3a1e08"/><path d="M108 44 Q118-20 130-24 Q142-20 152 44 Q140 26 130 24 Q120 26 108 44Z" fill="#2a1505"/><path d="M33 106 Q15 63 28 42 Q43 70 33 106Z" fill="#3a1e08"/><path d="M227 106 Q245 63 232 42 Q217 70 227 106Z" fill="#3a1e08"/><path d="M66 64 Q52 26 70 4 Q77 30 66 64Z" fill="#4a2810"/><path d="M93 46 Q88 6 106-8 Q109 20 93 46Z" fill="#4a2810"/><path d="M130 41 Q127 1 144-11 Q143 18 130 41Z" fill="#4a2810"/><path d="M163 46 Q164 6 177-3 Q175 24 163 46Z" fill="#4a2810"/><path d="M187 64 Q199 24 209 14 Q205 42 187 64Z" fill="#4a2810"/></g>
+      <g id="hs1" opacity="0"><ellipse cx="130" cy="62" rx="95" ry="48" fill="#2a1505"/><path d="M42 106 Q35 50 130 22 Q225 50 218 106 Q195 62 130 56 Q65 62 42 106Z" fill="#3a1e08"/><path d="M114 50 Q122-12 130-16 Q138-12 146 50 Q138 32 130 30 Q122 32 114 50Z" fill="#2a1505"/><path d="M45 110 Q30 70 40 50 Q52 76 45 110Z" fill="#3a1e08"/><path d="M215 110 Q230 70 220 50 Q208 76 215 110Z" fill="#3a1e08"/><path d="M80 68 Q70 36 84 16 Q90 38 80 68Z" fill="#4a2810" opacity=".75"/><path d="M130 48 Q128 12 142 0 Q141 24 130 48Z" fill="#4a2810" opacity=".75"/><path d="M178 68 Q186 34 196 26 Q192 48 178 68Z" fill="#4a2810" opacity=".75"/></g>
+      <g id="hs2" opacity="0"><path d="M62 116 Q55 70 130 28 Q205 70 198 116 Q182 76 130 70 Q78 76 62 116Z" fill="#2a1505"/><path d="M62 116 Q45 88 52 66 Q68 90 62 116Z" fill="#3a1e08"/><path d="M198 116 Q215 88 208 66 Q192 90 198 116Z" fill="#3a1e08"/><path d="M120 60 Q126 22 130 18 Q134 22 140 60 Q135 44 130 42 Q125 44 120 60Z" fill="#2a1505" opacity=".65"/><ellipse cx="130" cy="70" rx="22" ry="14" fill="#d4956a" opacity=".4"/><circle cx="110" cy="78" r="2" fill="#ffe0c8" opacity=".55"/><circle cx="130" cy="65" r="2.5" fill="#ffe0c8" opacity=".65"/><circle cx="150" cy="78" r="2" fill="#ffe0c8" opacity=".55"/></g>
+      <g id="hs3" opacity="0"><path d="M30 198 Q22 143 35 103 Q55 98 72 123 Q58 138 55 173 Q48 188 30 198Z" fill="#2a1505"/><path d="M230 198 Q238 143 225 103 Q205 98 188 123 Q202 138 205 173 Q212 188 230 198Z" fill="#2a1505"/><path d="M55 173 Q40 196 60 213 Q90 223 130 223 Q170 223 200 213 Q220 196 205 173 Q180 193 130 195 Q80 193 55 173Z" fill="#2a1505" opacity=".65"/><path d="M126 70 Q128 50 130 46 Q132 50 134 70" stroke="#3a1e08" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M118 74 Q121 56 123 52" stroke="#3a1e08" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55"/><path d="M142 74 Q139 56 137 52" stroke="#3a1e08" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55"/></g>
+      <g id="hs4" opacity="0"><path d="M40 156 Q36 128 44 110 Q52 128 52 156Z" fill="#2a1505" opacity=".75"/><path d="M220 156 Q224 128 216 110 Q208 128 208 156Z" fill="#2a1505" opacity=".75"/><path id="lastHair" d="M130 66 Q131 48 130 40 Q129 48 130 66" stroke="#3a1e08" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>
+      <g id="hs5" opacity="0"><ellipse cx="104" cy="66" rx="30" ry="14" fill="rgba(255,255,200,.22)" transform="rotate(-15 104 66)"/><ellipse cx="107" cy="63" rx="16" ry="7" fill="rgba(255,255,220,.32)" transform="rotate(-15 107 63)"/><ellipse cx="145" cy="73" rx="18" ry="8" fill="rgba(255,255,200,.15)" transform="rotate(10 145 73)"/></g>
       <ellipse id="shineEl" cx="105" cy="68" rx="0" ry="0" fill="rgba(255,255,200,.4)" transform="rotate(-15 105 68)"/>
-      <!-- óculos -->
       <rect x="68" y="153" width="44" height="28" rx="12" stroke="#3a2010" stroke-width="3" fill="rgba(180,220,255,0.1)"/>
       <rect x="148" y="153" width="44" height="28" rx="12" stroke="#3a2010" stroke-width="3" fill="rgba(180,220,255,0.1)"/>
       <line x1="112" y1="165" x2="148" y2="165" stroke="#3a2010" stroke-width="2.5"/>
-      <!-- face -->
       <path id="browL" d="M68 146 Q88 134 112 140" stroke="#5a3020" stroke-width="5" stroke-linecap="round" fill="none"/>
       <path id="browR" d="M148 140 Q172 134 192 146" stroke="#5a3020" stroke-width="5" stroke-linecap="round" fill="none"/>
-      <ellipse cx="90" cy="163" rx="18" ry="16" fill="white"/>
-      <ellipse cx="170" cy="163" rx="18" ry="16" fill="white"/>
-      <circle cx="93" cy="165" r="10" fill="#3a1a0a"/>
-      <circle cx="173" cy="165" r="10" fill="#3a1a0a"/>
-      <circle cx="89" cy="161" r="3.5" fill="white"/>
-      <circle cx="169" cy="161" r="3.5" fill="white"/>
-      <circle cx="93" cy="165" r="4.5" fill="#080808"/>
-      <circle cx="173" cy="165" r="4.5" fill="#080808"/>
+      <ellipse cx="90" cy="163" rx="18" ry="16" fill="white"/><ellipse cx="170" cy="163" rx="18" ry="16" fill="white"/>
+      <circle cx="93" cy="165" r="10" fill="#3a1a0a"/><circle cx="173" cy="165" r="10" fill="#3a1a0a"/>
+      <circle cx="89" cy="161" r="3.5" fill="white"/><circle cx="169" cy="161" r="3.5" fill="white"/>
+      <circle cx="93" cy="165" r="4.5" fill="#080808"/><circle cx="173" cy="165" r="4.5" fill="#080808"/>
       <ellipse id="tearEl" cx="78" cy="181" rx="4" ry="7" fill="#88ccff" opacity="0"/>
       <path d="M120 173 Q130 198 140 173" stroke="#9a5030" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-      <ellipse cx="117" cy="193" rx="9" ry="5" fill="#bf7a50"/>
-      <ellipse cx="143" cy="193" rx="9" ry="5" fill="#bf7a50"/>
+      <ellipse cx="117" cy="193" rx="9" ry="5" fill="#bf7a50"/><ellipse cx="143" cy="193" rx="9" ry="5" fill="#bf7a50"/>
       <path id="mouthEl" d="M90 216 Q130 246 170 216" stroke="#7a3010" stroke-width="4" stroke-linecap="round" fill="none"/>
-      <g id="sweatEl" opacity="0">
-        <ellipse cx="50" cy="148" rx="5" ry="8" fill="#88ccff" opacity=".7"/>
-        <ellipse cx="46" cy="164" rx="3" ry="5" fill="#88ccff" opacity=".5"/>
-        <ellipse cx="212" cy="148" rx="5" ry="8" fill="#88ccff" opacity=".7"/>
-      </g>
+      <g id="sweatEl" opacity="0"><ellipse cx="50" cy="148" rx="5" ry="8" fill="#88ccff" opacity=".7"/><ellipse cx="46" cy="164" rx="3" ry="5" fill="#88ccff" opacity=".5"/><ellipse cx="212" cy="148" rx="5" ry="8" fill="#88ccff" opacity=".7"/></g>
       <path id="veinEl" d="M155 76 Q161 64 155 53 Q149 64 155 76" stroke="#e06050" stroke-width="2.5" fill="none" opacity="0"/>
-      <g id="wrinkEl" opacity="0">
-        <path d="M95 123 Q115 118 135 122" stroke="#9a6040" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".45"/>
-        <path d="M100 133 Q118 128 136 130" stroke="#9a6040" stroke-width="1" fill="none" stroke-linecap="round" opacity=".3"/>
-      </g>
-      <defs>
-        <radialGradient id="sG" cx="40%" cy="35%" r="60%">
-          <stop offset="0%" stop-color="#f0b888"/>
-          <stop offset="60%" stop-color="#d4956a"/>
-          <stop offset="100%" stop-color="#b87040"/>
-        </radialGradient>
-      </defs>
+      <g id="wrinkEl" opacity="0"><path d="M95 123 Q115 118 135 122" stroke="#9a6040" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".45"/><path d="M100 133 Q118 128 136 130" stroke="#9a6040" stroke-width="1" fill="none" stroke-linecap="round" opacity=".3"/></g>
+      <defs><radialGradient id="sG" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#f0b888"/><stop offset="60%" stop-color="#d4956a"/><stop offset="100%" stop-color="#b87040"/></radialGradient></defs>
     </svg>
   </button>
   <div id="clickLabel">CLICK = <span id="cpDisp">1</span> FIO &nbsp;<span id="comboInline"></span></div>
-  <div id="forcaCapilarDisplay">💪 FORÇA CAPILAR: +<span id="fcPct">0</span>%</div>
+  <div id="forcaCapilarDisplay">💪 FORÇA: +<span id="fcPct">0</span>%</div>
 </main>
 
 <!-- RIGHT PANEL -->
@@ -480,14 +413,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
     <div><span class="ap-nm" id="apName">—</span><span class="ap-ds" id="apDesc">—</span></div>
   </div>
 </div>
-<div id="eventPopup">
-  <div class="ep-name" id="epName">—</div>
-  <div class="ep-desc" id="epDesc">—</div>
-</div>
-<div id="gfPopup">
-  <div class="gf-popup-name" id="gfPopName">—</div>
-  <div class="gf-popup-val" id="gfPopVal">—</div>
-</div>
+<div id="eventPopup"><div class="ep-name" id="epName">—</div><div id="epDesc" style="font-size:13px;color:var(--text)">—</div></div>
+<div id="gfPopup"><div class="gf-popup-name" id="gfPopName">—</div><div class="gf-popup-val" id="gfPopVal">—</div></div>
 <div id="brutal">
   <div class="br1">BRUTAL</div>
   <div class="br2">ACABOU PRO BETA</div>
@@ -496,290 +423,620 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
   <button class="br-restart" onclick="restartGame()">↺ JOGAR NOVAMENTE</button>
 </div>
 
+<!-- ═══════════════════════════════════
+     CAIO — O JAPONÊS DE CABELOS LONGOS
+     Easter egg: Clique DIREITO no Fio Dourado
+     ═══════════════════════════════════ -->
+<div id="caioOverlay">
+  <div id="caioBubble">髪の毛どうぞ！<br>Aqui estão alguns fios, Karlan-san! 😊</div>
+  <div id="caioHint"></div>
+  <div id="caioTimerTxt"></div>
+  <!-- Caio SVG: cabelos compridos + óculos redondos -->
+  <svg width="200" height="310" viewBox="0 0 200 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Sombra/base dos cabelos longos (muito compridos!) -->
+    <path d="M24 88 Q2 170 6 295 Q40 312 100 314 Q160 312 194 295 Q198 170 176 88" fill="#0b0500"/>
+    <path d="M30 88 Q10 160 14 278 Q45 296 100 298 Q155 296 186 278 Q190 160 170 88" fill="#160900"/>
+    <!-- Mechas laterais caindo (cabelos MUITO compridos, além do corpo) -->
+    <path d="M30 90 Q4 168 6 285" stroke="#1c0a00" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M170 90 Q196 168 194 285" stroke="#1c0a00" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M24 98 Q-2 180 2 272" stroke="#0d0400" stroke-width="7" fill="none" stroke-linecap="round" opacity=".6"/>
+    <path d="M176 98 Q202 180 198 272" stroke="#0d0400" stroke-width="7" fill="none" stroke-linecap="round" opacity=".6"/>
+    <!-- Corpo -->
+    <rect x="58" y="196" width="84" height="98" rx="14" fill="#2244aa"/>
+    <!-- Colar da camisa -->
+    <path d="M88 196 L100 216 L112 196" fill="#1a3088"/>
+    <!-- Braço esquerdo (estendido, oferecendo fios) -->
+    <rect x="14" y="202" width="46" height="20" rx="10" fill="#2244aa"/>
+    <ellipse cx="16" cy="212" rx="14" ry="14" fill="#f0c898"/>
+    <!-- Fios na mão (cabelos que o Caio está dando) -->
+    <path d="M16 212 Q5 190 14 168 Q22 148 32 124" stroke="#2a1200" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M16 212 Q2 186 8 162 Q18 142 28 114" stroke="#1a0800" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".75"/>
+    <path d="M16 212 Q-2 184 4 156 Q14 134 24 104" stroke="#2a1200" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".5"/>
+    <!-- Braço direito -->
+    <rect x="140" y="202" width="46" height="20" rx="10" fill="#2244aa"/>
+    <ellipse cx="184" cy="212" rx="14" ry="14" fill="#f0c898"/>
+    <!-- Pescoço -->
+    <rect x="82" y="182" width="36" height="24" fill="#f0c898"/>
+    <!-- Cabeça -->
+    <ellipse cx="100" cy="130" rx="48" ry="55" fill="#f0c898"/>
+    <!-- Franja/cabelo da frente -->
+    <path d="M52 116 Q54 64 100 56 Q146 64 148 116 Q132 80 100 76 Q68 80 52 116Z" fill="#1a0800"/>
+    <path d="M52 114 Q62 76 100 68 Q138 76 148 114 Q136 84 100 80 Q64 84 52 114Z" fill="#0e0500"/>
+    <!-- Franja descendo -->
+    <path d="M62 102 Q70 84 82 82 Q78 100 74 116" fill="#1a0800"/>
+    <path d="M118 82 Q130 84 138 102 Q134 116 126 116" fill="#1a0800"/>
+    <!-- ÓCULOS REDONDOS (destaque visual!) -->
+    <circle cx="80" cy="130" r="18" stroke="#111" stroke-width="3.5" fill="rgba(80,140,255,.18)"/>
+    <circle cx="120" cy="130" r="18" stroke="#111" stroke-width="3.5" fill="rgba(80,140,255,.18)"/>
+    <!-- Ponte dos óculos -->
+    <line x1="98" y1="130" x2="102" y2="130" stroke="#111" stroke-width="2.8"/>
+    <!-- Hastes -->
+    <line x1="62" y1="128" x2="52" y2="126" stroke="#111" stroke-width="2.8"/>
+    <line x1="138" y1="128" x2="148" y2="126" stroke="#111" stroke-width="2.8"/>
+    <!-- Olhos dentro dos óculos -->
+    <ellipse cx="80" cy="130" rx="8" ry="9" fill="#1a0800"/>
+    <ellipse cx="120" cy="130" rx="8" ry="9" fill="#1a0800"/>
+    <!-- Brilho nos olhos -->
+    <circle cx="77" cy="127" r="3.2" fill="white"/>
+    <circle cx="117" cy="127" r="3.2" fill="white"/>
+    <!-- Sobrancelhas -->
+    <path d="M63 112 Q80 105 96 109" stroke="#1a0800" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    <path d="M104 109 Q120 105 137 112" stroke="#1a0800" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    <!-- Sorriso gentil -->
+    <path d="M82 152 Q100 170 118 152" stroke="#c06030" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- Bochechas -->
+    <ellipse cx="64" cy="145" rx="11" ry="7" fill="#ffb0a0" opacity=".45"/>
+    <ellipse cx="136" cy="145" rx="11" ry="7" fill="#ffb0a0" opacity=".45"/>
+    <!-- Reflexo brilhante nos óculos -->
+    <ellipse cx="72" cy="124" rx="5" ry="3" fill="rgba(255,255,255,.25)" transform="rotate(-20 72 124)"/>
+    <ellipse cx="112" cy="124" rx="5" ry="3" fill="rgba(255,255,255,.25)" transform="rotate(-20 112 124)"/>
+    <!-- Detalhes finais dos cabelos laterais -->
+    <path d="M8 130 Q12 170 14 218" stroke="#2a1000" stroke-width="3" fill="none" opacity=".4" stroke-linecap="round"/>
+    <path d="M192 130 Q188 170 186 218" stroke="#2a1000" stroke-width="3" fill="none" opacity=".4" stroke-linecap="round"/>
+    <!-- Nome CAIO -->
+    <text x="100" y="305" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="24" fill="#ffd700" letter-spacing="7">CAIO</text>
+    <!-- Texto japonês acima da cabeça -->
+    <text x="100" y="26" text-anchor="middle" font-size="11" fill="#88ffbb" opacity=".9">髪の毛どうぞ！</text>
+  </svg>
+</div>
+
+<!-- MODAL: LOGIN / CADASTRO -->
+<div id="loginModal" class="k-modal">
+  <div class="k-box">
+    <div class="k-logo">🦲 KARLAN CLICKER</div>
+    <div class="k-sub" id="authTitle">LOGIN</div>
+    <input type="text" class="k-inp" id="authUser" placeholder="NOME DE USUÁRIO" maxlength="20"
+      onkeydown="if(event.key==='Enter')submitAuth()">
+    <input type="password" class="k-inp" id="authPass" placeholder="SENHA" maxlength="30"
+      onkeydown="if(event.key==='Enter')submitAuth()">
+    <div class="k-err" id="authErr"></div>
+    <button class="k-btn k-primary" id="authSubmitBtn" onclick="submitAuth()">ENTRAR</button>
+    <div class="k-switch">
+      <span id="authSwitchTxt">Não tem conta?</span>
+      <button class="k-link" id="authSwitchBtn" onclick="toggleAuthMode()">CADASTRAR</button>
+    </div>
+    <hr class="k-hr">
+    <button class="k-ghost" onclick="skipAuth()">▶ Jogar como visitante (sem ranking)</button>
+  </div>
+</div>
+
+<!-- MODAL: MENU DO USUÁRIO LOGADO -->
+<div id="userModal" class="k-modal hidden">
+  <div class="k-box" style="max-width:320px">
+    <div class="k-logo" style="font-size:20px" id="umName">👤 —</div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--dim)">Fios all-time</span><span id="umAtf" style="color:var(--gold2)">0</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--dim)">Prestígios</span><span id="umPres" style="color:#d080f0">0</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--dim)">Conquistas</span><span id="umAch" style="color:var(--gold3)">0</span>
+    </div>
+    <button class="k-btn k-primary" onclick="showLeaderboard();hideUserModal()">🏆 Ver Top 100</button>
+    <button class="k-ghost" onclick="doLogout()">🚪 Sair da conta</button>
+    <button class="k-ghost" onclick="hideUserModal()">✕ Fechar</button>
+  </div>
+</div>
+
+<!-- MODAL: LEADERBOARD TOP 100 -->
+<div id="lbModal" class="k-modal hidden">
+  <div class="k-box lb-box">
+    <div class="k-logo" style="font-size:18px">🏆 TOP 100 CARECAS DO MUNDO</div>
+    <div class="lb-rank-info" id="lbRankInfo">Faça login para aparecer no ranking</div>
+    <!--
+      DJANGO INTEGRATION (para tornar isso real):
+      Model: Score(user OneToOne, atf BigInt, pres Int, ach Int, updated DateTimeField auto_now)
+      GET  /api/leaderboard/   → top 100 ordenados por atf desc
+      POST /api/leaderboard/   → upsert do score do usuário logado (JWT)
+      Substitua getLB()/updateLBEntry() por chamadas fetch à sua API
+    -->
+    <div class="lb-scroll">
+      <table class="lb-table">
+        <thead><tr>
+          <th style="width:50px">RANK</th>
+          <th>JOGADOR</th>
+          <th>FIOS TOTAIS</th>
+          <th>PREST.</th>
+          <th>ACHIEV.</th>
+        </tr></thead>
+        <tbody id="lbBody"></tbody>
+      </table>
+    </div>
+    <button class="k-ghost" style="margin-top:10px" onclick="hideLbModal()">✕ FECHAR</button>
+  </div>
+</div>
+
 <script>
 'use strict';
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // DATA
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 const BUILDINGS=[
-  {id:'pillow',    name:'Travesseiro de Palha',    emoji:'🛏️', desc:'Arranca cabelos durante o sono.',           baseCost:15,         basePs:.1,      unlockAt:0},
-  {id:'keyboard',  name:'Teclado Mecânico',         emoji:'⌨️', desc:'400× Delete no TCC do aluno por dia.',     baseCost:120,        basePs:.5,      unlockAt:1},
-  {id:'stackoverflow',name:'Stack Overflow',        emoji:'📚', desc:'"Por que não funciona?" × infinito.',      baseCost:600,        basePs:2,       unlockAt:5},
-  {id:'whatsapp',  name:'Grupo de Alunos',           emoji:'📱', desc:'Mensagens às 3h: "Prof tá acordado?"',    baseCost:2200,       basePs:8,       unlockAt:10},
-  {id:'tcc',       name:'Bancas de TCC',             emoji:'📝', desc:'50 páginas de ChatGPT sem revisar.',      baseCost:8500,       basePs:30,      unlockAt:25},
-  {id:'server',    name:'Servidor da Faculdade',     emoji:'🖥️', desc:'Cai no dia da prova. Sempre.',            baseCost:32000,      basePs:120,     unlockAt:50},
-  {id:'meeting',   name:'Reunião de Colegiado',      emoji:'🏛️', desc:'3h para decidir cor do cabeçalho.',      baseCost:130000,     basePs:500,     unlockAt:100},
-  {id:'php',       name:'Código PHP Legado',         emoji:'🐘', desc:'Feito em 2003. Funciona. Ninguém toca.',  baseCost:550000,     basePs:2000,    unlockAt:150},
-  {id:'winupd',    name:'Windows Update Forçado',    emoji:'💿', desc:'Meio da aula. Sem aviso.',                baseCost:2200000,    basePs:8000,    unlockAt:200},
-  {id:'chatgpt',   name:'Plágio com ChatGPT',        emoji:'🤖', desc:'Aluno entregou sem ler uma linha.',       baseCost:9000000,    basePs:35000,   unlockAt:250},
-  {id:'dht',       name:'Lab de DHT',                emoji:'🧬', desc:'Ciência aplicada à destruição capilar.',  baseCost:40000000,   basePs:150000,  unlockAt:300},
-  {id:'quantum',   name:'Calvície Quântica',          emoji:'🌀', desc:'Observar o cabelo faz ele cair.',        baseCost:200000000,  basePs:750000,  unlockAt:400},
-  {id:'portal',    name:'Portal Anti-Capilar',        emoji:'🕳️', desc:'Dimensão onde cabelo não existe.',       baseCost:1500000000, basePs:4000000, unlockAt:500},
-  {id:'blackhole', name:'Buraco Negro Capilar',       emoji:'⚫', desc:'Nem a luz escapa. Nem o cabelo.',        baseCost:1e13,       basePs:2e7,     unlockAt:600},
-  {id:'dimension', name:'Dimensão da Alopecia',       emoji:'🌌', desc:'Realidade onde calvície é lei.',         baseCost:1e15,       basePs:1.5e8,   unlockAt:700},
-  {id:'god',       name:'Karlan Transcendente',       emoji:'✨', desc:'A forma final além da matéria.',         baseCost:1e17,       basePs:1e9,     unlockAt:800},
+  {id:'pillow',   name:'Travesseiro de Palha',  emoji:'🛏️',desc:'Arranca cabelos no sono.',          baseCost:15,       basePs:.1,   unlockAt:0},
+  {id:'keyboard', name:'Teclado Mecânico',       emoji:'⌨️',desc:'400× Delete no TCC.',               baseCost:120,      basePs:.5,   unlockAt:1},
+  {id:'stackoverflow',name:'Stack Overflow',     emoji:'📚',desc:'"Por que não funciona?" infinito.', baseCost:600,      basePs:2,    unlockAt:5},
+  {id:'whatsapp', name:'Grupo de Alunos',         emoji:'📱',desc:'Msgs às 3h: "Prof acordado?"',     baseCost:2200,     basePs:8,    unlockAt:10},
+  {id:'tcc',      name:'Bancas de TCC',           emoji:'📝',desc:'50 páginas de ChatGPT.',           baseCost:8500,     basePs:30,   unlockAt:25},
+  {id:'server',   name:'Servidor da Faculdade',   emoji:'🖥️',desc:'Cai no dia da prova.',             baseCost:32000,    basePs:120,  unlockAt:50},
+  {id:'meeting',  name:'Reunião de Colegiado',    emoji:'🏛️',desc:'3h para escolher cor do cabeçalho.',baseCost:130000,   basePs:500,  unlockAt:100},
+  {id:'php',      name:'Código PHP Legado',        emoji:'🐘',desc:'Feito em 2003. Ninguém toca.',    baseCost:550000,   basePs:2000, unlockAt:150},
+  {id:'winupd',   name:'Windows Update Forçado',  emoji:'💿',desc:'Meio da aula. Sem aviso.',         baseCost:2200000,  basePs:8000, unlockAt:200},
+  {id:'chatgpt',  name:'Plágio com ChatGPT',       emoji:'🤖',desc:'Aluno entregou sem ler.',         baseCost:9000000,  basePs:35000,unlockAt:250},
+  {id:'dht',      name:'Lab de DHT',               emoji:'🧬',desc:'Destruição capilar científica.',  baseCost:4e7,      basePs:150000,unlockAt:300},
+  {id:'quantum',  name:'Calvície Quântica',         emoji:'🌀',desc:'Observar faz cair.',              baseCost:2e8,      basePs:750000,unlockAt:400},
+  {id:'portal',   name:'Portal Anti-Capilar',       emoji:'🕳️',desc:'Dimensão sem cabelo.',           baseCost:1.5e9,    basePs:4e6,  unlockAt:500},
+  {id:'blackhole',name:'Buraco Negro Capilar',      emoji:'⚫',desc:'Nem a luz escapa.',              baseCost:1e13,     basePs:2e7,  unlockAt:600},
+  {id:'dimension',name:'Dimensão da Alopecia',      emoji:'🌌',desc:'Realidade onde calvície é lei.', baseCost:1e15,     basePs:1.5e8,unlockAt:700},
+  {id:'god',      name:'Karlan Transcendente',      emoji:'✨',desc:'A forma final.',                  baseCost:1e17,     basePs:1e9,  unlockAt:800},
 ];
-
 const BLD_TIERS=[
-  {count:10,  mult:2, cm:10,   lbl:'II'},
-  {count:25,  mult:2, cm:50,   lbl:'III'},
-  {count:50,  mult:3, cm:200,  lbl:'IV'},
-  {count:100, mult:3, cm:800,  lbl:'V'},
-  {count:200, mult:5, cm:4000, lbl:'VI'},
-  {count:400, mult:5, cm:20000,lbl:'VII'},
+  {count:10, mult:2,cm:10,   lbl:'II'},
+  {count:25, mult:2,cm:50,   lbl:'III'},
+  {count:50, mult:3,cm:200,  lbl:'IV'},
+  {count:100,mult:3,cm:800,  lbl:'V'},
+  {count:200,mult:5,cm:4000, lbl:'VI'},
+  {count:400,mult:5,cm:20000,lbl:'VII'},
 ];
-
 const CLICK_UPGRADES=[
-  {id:'cu01',name:'Shampoo Agressivo',         desc:'Lava e arranca.',                  eff:'+2/click',         bonus:2,        cost:30,         req:0},
-  {id:'cu02',name:'Pente de Garfo',             desc:'Penetração máxima.',               eff:'+5/click',         bonus:5,        cost:250,        req:150},
-  {id:'cu03',name:'Toalha de Granito',          desc:'Abrasão nível industrial.',         eff:'+15/click',        bonus:15,       cost:1600,       req:800},
-  {id:'cu04',name:'Chapéu 3 Nums Menor',        desc:'Comprime a circulação.',            eff:'+50/click',        bonus:50,       cost:12000,      req:4000},
-  {id:'cu05',name:'Projetor sem HDMI',          desc:'20min de stress procurando.',       eff:'+180/click',       bonus:180,      cost:60000,      req:20000},
-  {id:'cu06',name:'Aluno "Cai na Prova?"',      desc:'Direto no coração.',                eff:'+600/click',       bonus:600,      cost:320000,     req:80000},
-  {id:'cu07',name:'Reunião Surpresa 6h',        desc:'Stress pré-auroral.',               eff:'+2000/click',      bonus:2000,     cost:1800000,    req:350000},
-  {id:'cu08',name:'TCC 300 Páginas',            desc:'Devolvido pela 4ª vez.',            eff:'+7000/click',      bonus:7000,     cost:9000000,    req:1500000},
-  {id:'cu09',name:'Git Push --Force Prod',      desc:'Estagiário fez. Prod caiu.',        eff:'+25000/click',     bonus:25000,    cost:50000000,   req:8000000},
-  {id:'cu10',name:'Nota do MEC Negativa',       desc:'Stress existencial.',               eff:'+100000/click',    bonus:100000,   cost:3e8,        req:5e7},
-  {id:'cu11',name:'Disciplina Cancelada',       desc:'40 alunos sem formatura.',          eff:'+500000/click',    bonus:500000,   cost:2e9,        req:5e8},
-  {id:'cu12',name:'Plágio Detectado',           desc:'Turma inteira reprovada.',          eff:'+2000000/click',   bonus:2000000,  cost:1.5e10,     req:4e9},
-  {id:'cu13',name:'Invasão do Sistema',         desc:'Aluno no banco de dados.',          eff:'+10000000/click',  bonus:1e7,      cost:1e11,       req:3e10},
-  {id:'cu14',name:'Quantum Entanglement',       desc:'Click e cabeça conectados.',        eff:'+5e7/click',       bonus:5e7,      cost:1e12,       req:2e11},
-  {id:'cu15',name:'Singularidade do Click',     desc:'Todo fio do universo.',             eff:'+3e8/click',       bonus:3e8,      cost:1e13,       req:1e12},
+  {id:'cu01',name:'Shampoo Agressivo',      eff:'+2/click',  bonus:2,    cost:30,     req:0},
+  {id:'cu02',name:'Pente de Garfo',          eff:'+5/click',  bonus:5,    cost:250,    req:150},
+  {id:'cu03',name:'Toalha de Granito',       eff:'+15/click', bonus:15,   cost:1600,   req:800},
+  {id:'cu04',name:'Chapéu 3 Nums Menor',     eff:'+50/click', bonus:50,   cost:12000,  req:4000},
+  {id:'cu05',name:'Projetor sem HDMI',       eff:'+180/click',bonus:180,  cost:60000,  req:20000},
+  {id:'cu06',name:'Aluno "Cai na Prova?"',   eff:'+600/click',bonus:600,  cost:320000, req:80000},
+  {id:'cu07',name:'Reunião Surpresa 6h',     eff:'+2K/click', bonus:2000, cost:1800000,req:350000},
+  {id:'cu08',name:'TCC 300 Páginas',         eff:'+7K/click', bonus:7000, cost:9000000,req:1500000},
+  {id:'cu09',name:'Git Push --Force',        eff:'+25K/click',bonus:25000,cost:5e7,    req:8000000},
+  {id:'cu10',name:'Nota MEC Negativa',       eff:'+100K/cl',  bonus:1e5,  cost:3e8,    req:5e7},
+  {id:'cu11',name:'Disciplina Cancelada',    eff:'+500K/cl',  bonus:5e5,  cost:2e9,    req:5e8},
+  {id:'cu12',name:'Plágio Detectado',        eff:'+2M/click', bonus:2e6,  cost:1.5e10, req:4e9},
+  {id:'cu13',name:'Invasão do Sistema',      eff:'+10M/click',bonus:1e7,  cost:1e11,   req:3e10},
+  {id:'cu14',name:'Quantum Entanglement',    eff:'+50M/click',bonus:5e7,  cost:1e12,   req:2e11},
+  {id:'cu15',name:'Singularidade Click',     eff:'+300M/cl',  bonus:3e8,  cost:1e13,   req:1e12},
 ];
-
 const CASPA_UPGRADES=[
-  {id:'cs1', name:'Karma Capilar I',        desc:'O universo cobra.',               eff:'×2 toda produção',      cost:1,     pm:2,   cm:1},
-  {id:'cs2', name:'Click Traumatizado',     desc:'Cada clique tem memória.',        eff:'×3 poder de click',     cost:3,     pm:1,   cm:3},
-  {id:'cs3', name:'Herança Genética',       desc:'Pai, avô, bisavô: carecas.',      eff:'×5 toda produção',      cost:8,     pm:5,   cm:1},
-  {id:'cs4', name:'Segunda Fase de Luto',   desc:'Negação total.',                  eff:'×3 click & ×3 prod',    cost:25,    pm:3,   cm:3},
-  {id:'cs5', name:'Professor Sênior',       desc:'30 anos = 0 fios.',               eff:'×8 toda produção',      cost:80,    pm:8,   cm:1},
-  {id:'cs6', name:'Karma Capilar II',       desc:'2º semestre pior.',               eff:'×5 click & ×5 prod',    cost:250,   pm:5,   cm:5},
-  {id:'cs7', name:'DHT Dimensional',        desc:'Atravessa o astral.',             eff:'×20 toda produção',     cost:800,   pm:20,  cm:1},
-  {id:'cs8', name:'Karlan Prime',           desc:'A forma final.',                  eff:'×15 click & ×15 prod',  cost:3000,  pm:15,  cm:15},
-  {id:'cs9', name:'Transcendência Capilar', desc:'Além da física.',                 eff:'×50 toda produção',     cost:15000, pm:50,  cm:1},
-  {id:'cs10',name:'Karlan Absoluto',        desc:'O criador e destruidor.',         eff:'×100 click & ×50 prod', cost:100000,pm:50,  cm:100},
-  {id:'cs11',name:'Infinito Capilar',       desc:'Fios de todas as realidades.',    eff:'×200 toda produção',    cost:500000,pm:200, cm:1},
-  {id:'cs12',name:'Omega Careca',           desc:'Último nível possível.',          eff:'×500 click & ×200 prod',cost:5000000,pm:200,cm:500},
+  {id:'cs1', name:'Karma Capilar I',    eff:'×2 produção',    cost:1,     pm:2,  cm:1},
+  {id:'cs2', name:'Click Traumatizado', eff:'×3 click',       cost:3,     pm:1,  cm:3},
+  {id:'cs3', name:'Herança Genética',   eff:'×5 produção',    cost:8,     pm:5,  cm:1},
+  {id:'cs4', name:'Segunda Fase Luto',  eff:'×3 click+prod',  cost:25,    pm:3,  cm:3},
+  {id:'cs5', name:'Professor Sênior',   eff:'×8 produção',    cost:80,    pm:8,  cm:1},
+  {id:'cs6', name:'Karma Capilar II',   eff:'×5 click+prod',  cost:250,   pm:5,  cm:5},
+  {id:'cs7', name:'DHT Dimensional',    eff:'×20 produção',   cost:800,   pm:20, cm:1},
+  {id:'cs8', name:'Karlan Prime',       eff:'×15 click+prod', cost:3000,  pm:15, cm:15},
+  {id:'cs9', name:'Transcendência',     eff:'×50 produção',   cost:15000, pm:50, cm:1},
+  {id:'cs10',name:'Karlan Absoluto',    eff:'×100 tudo',      cost:100000,pm:50, cm:100},
+  {id:'cs11',name:'Infinito Capilar',   eff:'×200 produção',  cost:500000,pm:200,cm:1},
+  {id:'cs12',name:'Omega Careca',       eff:'×500 click+prod',cost:5e6,   pm:200,cm:500},
 ];
-
 const ACHIEVEMENTS=[
-  {id:'a01',icon:'🦱',  name:'Primeiro Fio',           desc:'Perca o primeiro fio.',                  req:s=>s.atf>=1},
-  {id:'a02',icon:'💇',  name:'Começo do Fim',           desc:'100 fios perdidos.',                     req:s=>s.atf>=100},
-  {id:'a03',icon:'🪮',  name:'Pente Inimigo',           desc:'1.000 fios.',                            req:s=>s.atf>=1000},
-  {id:'a04',icon:'🔬',  name:'Diagnóstico',             desc:'10.000 fios.',                           req:s=>s.atf>=10000},
-  {id:'a05',icon:'🌀',  name:'Espiral Capilar',         desc:'100.000 fios.',                          req:s=>s.atf>=100000},
-  {id:'a06',icon:'🕳️', name:'Buraco Negro',             desc:'1 milhão de fios.',                      req:s=>s.atf>=1000000},
-  {id:'a07',icon:'💥',  name:'Singularidade',           desc:'10 milhões de fios.',                    req:s=>s.atf>=1e7},
-  {id:'a08',icon:'♾️', name:'Infinito',                  desc:'100 milhões de fios.',                   req:s=>s.atf>=1e8},
-  {id:'a09',icon:'🌠',  name:'Bilionário Capilar',      desc:'1 bilhão de fios.',                      req:s=>s.atf>=1e9},
-  {id:'a10',icon:'🌌',  name:'Galáxia de Fios',         desc:'1 trilhão de fios.',                     req:s=>s.atf>=1e12},
-  {id:'a11',icon:'👆',  name:'Nervoso',                 desc:'100 clicks.',                            req:s=>s.tc>=100},
-  {id:'a12',icon:'👊',  name:'Dedicado',                desc:'1.000 clicks.',                          req:s=>s.tc>=1000},
-  {id:'a13',icon:'🤜',  name:'Obcecado',                desc:'10.000 clicks.',                         req:s=>s.tc>=10000},
-  {id:'a14',icon:'⚡',  name:'Máquina',                 desc:'100.000 clicks.',                        req:s=>s.tc>=100000},
-  {id:'a15',icon:'🖱️', name:'Mouse Quebrado',           desc:'1.000.000 clicks.',                      req:s=>s.tc>=1000000},
-  {id:'a16',icon:'💀',  name:'R.I.P. Mouse',            desc:'10 milhões de clicks.',                  req:s=>s.tc>=1e7},
-  {id:'a17',icon:'💀💀',name:'Além do Mouse',           desc:'100 milhões de clicks.',                 req:s=>s.tc>=1e8},
-  {id:'a18',icon:'🎯',  name:'Combo Duplo!',            desc:'Primeiro combo duplo.',                  req:s=>s.combosTotal>=1},
-  {id:'a19',icon:'🔥',  name:'Inferno do Combo',        desc:'100 combos.',                            req:s=>s.combosTotal>=100},
-  {id:'a20',icon:'💫',  name:'Maestro do Combo',        desc:'10.000 combos.',                         req:s=>s.combosTotal>=10000},
-  {id:'a21',icon:'⚙️', name:'Automação',               desc:'1 fio/segundo.',                         req:s=>s.tps>=1},
-  {id:'a22',icon:'🏭',  name:'Fábrica',                 desc:'100 fios/segundo.',                      req:s=>s.tps>=100},
-  {id:'a23',icon:'🌊',  name:'Tsunami',                 desc:'10.000/segundo.',                        req:s=>s.tps>=10000},
-  {id:'a24',icon:'🚀',  name:'Luz',                     desc:'1.000.000/segundo.',                     req:s=>s.tps>=1000000},
-  {id:'a25',icon:'🌟',  name:'Estrela',                 desc:'1 bilhão/segundo.',                      req:s=>s.tps>=1e9},
-  {id:'a26',icon:'🌌',  name:'Galáxia',                 desc:'1 trilhão/segundo.',                     req:s=>s.tps>=1e12},
-  {id:'a27',icon:'🏗️', name:'Construtor',              desc:'10 prédios totais.',                     req:s=>totBld(s)>=10},
-  {id:'a28',icon:'🏙️', name:'Cidade Careca',           desc:'100 prédios.',                           req:s=>totBld(s)>=100},
-  {id:'a29',icon:'🌆',  name:'Metrópole',               desc:'500 prédios.',                           req:s=>totBld(s)>=500},
-  {id:'a30',icon:'🌐',  name:'Nação Careca',            desc:'1.000 prédios.',                         req:s=>totBld(s)>=1000},
-  {id:'a31',icon:'💻',  name:'Professor de TI',         desc:'Primeiro servidor.',                     req:s=>(s.bld['server']||0)>=1},
-  {id:'a32',icon:'📱',  name:'Sou o Grupão',            desc:'50 grupos de alunos.',                   req:s=>(s.bld['whatsapp']||0)>=50},
-  {id:'a33',icon:'🤖',  name:'Turma do Plágio',         desc:'Primeiro ChatGPT.',                      req:s=>(s.bld['chatgpt']||0)>=1},
-  {id:'a34',icon:'🎓',  name:'PhD em Calvície',         desc:'Todos os prédios.',                      req:s=>BUILDINGS.every(b=>(s.bld[b.id]||0)>=1)},
-  {id:'a35',icon:'⚡',  name:'Turbo Click',             desc:'Todos upgrades de click.',               req:s=>CLICK_UPGRADES.every(u=>s.cu[u.id])},
-  {id:'a36',icon:'💜',  name:'Prestígio I',             desc:'Primeiro prestígio.',                    req:s=>s.pres>=1},
-  {id:'a37',icon:'💜💜',name:'Veterano',                desc:'5 prestígios.',                          req:s=>s.pres>=5},
-  {id:'a38',icon:'🦲',  name:'Lenda Careca',            desc:'10 prestígios.',                         req:s=>s.pres>=10},
-  {id:'a39',icon:'👑',  name:'Rei dos Carecas',         desc:'25 prestígios.',                         req:s=>s.pres>=25},
-  {id:'a40',icon:'✨',  name:'Transcendente',           desc:'50 prestígios.',                         req:s=>s.pres>=50},
-  {id:'a41',icon:'🌟',  name:'Fio Dourado I',           desc:'Primeiro Fio Dourado clicado.',          req:s=>s.goldenClicks>=1},
-  {id:'a42',icon:'🌟🌟',name:'Fio Dourado X',           desc:'10 Fios Dourados clicados.',             req:s=>s.goldenClicks>=10},
-  {id:'a43',icon:'👑🌟',name:'Caçador de Ouro',         desc:'100 Fios Dourados.',                     req:s=>s.goldenClicks>=100},
-  {id:'a44',icon:'🌩️', name:'Sobrevivente',             desc:'20 eventos.',                            req:s=>s.eventsTotal>=20},
-  {id:'a45',icon:'😱',  name:'Queda Extrema',           desc:'Evento Queda Extrema vivido.',           req:s=>s.hadExtreme},
-  {id:'a46',icon:'🧫',  name:'Cientista',               desc:'100 de caspa total.',                    req:s=>s.tCaspa>=100},
-  {id:'a47',icon:'💪',  name:'Força Capilar 10%',       desc:'+10% de força capilar.',                 req:s=>s.ach.length>=10},
-  {id:'a48',icon:'💪💪',name:'Força Capilar 25%',       desc:'+25% de força capilar.',                 req:s=>s.ach.length>=25},
-  {id:'a49',icon:'🔱',  name:'Força Máxima',            desc:'+40% força capilar.',                    req:s=>s.ach.length>=40},
-  {id:'a50',icon:'🌀',  name:'Completista',             desc:'Todas as conquistas anteriores.',        req:s=>s.ach.filter(x=>x!=='a50').length>=49},
+  {id:'a01',icon:'🦱', name:'Primeiro Fio',        desc:'Perca o 1º fio.',          req:s=>s.atf>=1},
+  {id:'a02',icon:'💇', name:'Começo do Fim',        desc:'100 fios perdidos.',       req:s=>s.atf>=100},
+  {id:'a03',icon:'🪮', name:'Pente Inimigo',        desc:'1.000 fios.',              req:s=>s.atf>=1000},
+  {id:'a04',icon:'🔬', name:'Diagnóstico',          desc:'10.000 fios.',             req:s=>s.atf>=10000},
+  {id:'a05',icon:'🌀', name:'Espiral Capilar',      desc:'100.000 fios.',            req:s=>s.atf>=100000},
+  {id:'a06',icon:'🕳️',name:'Buraco Negro',          desc:'1 milhão de fios.',        req:s=>s.atf>=1000000},
+  {id:'a07',icon:'💥', name:'Singularidade',        desc:'10 milhões.',              req:s=>s.atf>=1e7},
+  {id:'a08',icon:'♾️',name:'Infinito',              desc:'100 milhões.',             req:s=>s.atf>=1e8},
+  {id:'a09',icon:'🌠', name:'Bilionário Capilar',   desc:'1 bilhão.',                req:s=>s.atf>=1e9},
+  {id:'a10',icon:'🌌', name:'Galáxia de Fios',      desc:'1 trilhão.',               req:s=>s.atf>=1e12},
+  {id:'a11',icon:'👆', name:'Nervoso',              desc:'100 clicks.',              req:s=>s.tc>=100},
+  {id:'a12',icon:'👊', name:'Dedicado',             desc:'1.000 clicks.',            req:s=>s.tc>=1000},
+  {id:'a13',icon:'🤜', name:'Obcecado',             desc:'10.000 clicks.',           req:s=>s.tc>=10000},
+  {id:'a14',icon:'⚡', name:'Máquina',              desc:'100.000 clicks.',          req:s=>s.tc>=100000},
+  {id:'a15',icon:'🖱️',name:'Mouse Quebrado',        desc:'1 milhão de clicks.',      req:s=>s.tc>=1000000},
+  {id:'a16',icon:'💀', name:'R.I.P. Mouse',         desc:'10M de clicks.',           req:s=>s.tc>=1e7},
+  {id:'a17',icon:'🎯', name:'Combo Duplo!',         desc:'Primeiro combo duplo.',    req:s=>s.combosTotal>=1},
+  {id:'a18',icon:'🔥', name:'Inferno do Combo',     desc:'100 combos.',              req:s=>s.combosTotal>=100},
+  {id:'a19',icon:'💫', name:'Maestro do Combo',     desc:'10.000 combos.',           req:s=>s.combosTotal>=10000},
+  {id:'a20',icon:'⚙️',name:'Automação',            desc:'1 fio/segundo.',           req:s=>s.tps>=1},
+  {id:'a21',icon:'🏭', name:'Fábrica',              desc:'100 fios/segundo.',        req:s=>s.tps>=100},
+  {id:'a22',icon:'🌊', name:'Tsunami',              desc:'10.000/segundo.',          req:s=>s.tps>=10000},
+  {id:'a23',icon:'🚀', name:'Luz',                  desc:'1 milhão/segundo.',        req:s=>s.tps>=1000000},
+  {id:'a24',icon:'🌟', name:'Estrela',              desc:'1 bilhão/segundo.',        req:s=>s.tps>=1e9},
+  {id:'a25',icon:'🏗️',name:'Construtor',           desc:'10 prédios.',              req:s=>totBld(s)>=10},
+  {id:'a26',icon:'🏙️',name:'Cidade Careca',         desc:'100 prédios.',             req:s=>totBld(s)>=100},
+  {id:'a27',icon:'🌆', name:'Metrópole',            desc:'500 prédios.',             req:s=>totBld(s)>=500},
+  {id:'a28',icon:'💻', name:'Professor de TI',      desc:'1º servidor.',             req:s=>(s.bld['server']||0)>=1},
+  {id:'a29',icon:'🤖', name:'Turma do Plágio',      desc:'1º ChatGPT.',              req:s=>(s.bld['chatgpt']||0)>=1},
+  {id:'a30',icon:'🎓', name:'PhD em Calvície',      desc:'Todos os prédios.',        req:s=>BUILDINGS.every(b=>(s.bld[b.id]||0)>=1)},
+  {id:'a31',icon:'⚡', name:'Turbo Click',          desc:'Todos upgrades de click.', req:s=>CLICK_UPGRADES.every(u=>s.cu[u.id])},
+  {id:'a32',icon:'💜', name:'Prestígio I',          desc:'1º prestígio.',            req:s=>s.pres>=1},
+  {id:'a33',icon:'💜💜',name:'Veterano',            desc:'5 prestígios.',            req:s=>s.pres>=5},
+  {id:'a34',icon:'🦲', name:'Lenda Careca',         desc:'10 prestígios.',           req:s=>s.pres>=10},
+  {id:'a35',icon:'👑', name:'Rei dos Carecas',      desc:'25 prestígios.',           req:s=>s.pres>=25},
+  {id:'a36',icon:'✨', name:'Transcendente',        desc:'50 prestígios.',           req:s=>s.pres>=50},
+  {id:'a37',icon:'🌟', name:'Fio Dourado I',        desc:'1º fio dourado clicado.',  req:s=>s.goldenClicks>=1},
+  {id:'a38',icon:'🌟🌟',name:'Caçador de Ouro',    desc:'10 fios dourados.',        req:s=>s.goldenClicks>=10},
+  {id:'a39',icon:'👑🌟',name:'Mestre do Ouro',     desc:'100 fios dourados.',       req:s=>s.goldenClicks>=100},
+  {id:'a40',icon:'🌩️',name:'Sobrevivente',          desc:'20 eventos vividos.',      req:s=>s.eventsTotal>=20},
+  {id:'a41',icon:'😱', name:'Queda Extrema',        desc:'Evento extremo vivido.',   req:s=>s.hadExtreme},
+  {id:'a42',icon:'🧫', name:'Cientista',            desc:'100 caspa total.',         req:s=>s.tCaspa>=100},
+  {id:'a43',icon:'💪', name:'Força Capilar 10%',   desc:'+10% força.',              req:s=>s.ach.length>=10},
+  {id:'a44',icon:'💪💪',name:'Força Capilar 25%',  desc:'+25% força.',              req:s=>s.ach.length>=25},
+  {id:'a45',icon:'🔱', name:'Força Máxima',         desc:'+40% força.',              req:s=>s.ach.length>=40},
+  {id:'a46',icon:'🏆', name:'Competidor',           desc:'Entre no top 100.',        req:s=>!!s.inTop100},
+  // Easter egg Caio — desbloqueado ao descobrir o segredo
+  {id:'a47',icon:'🎌', name:'Caio-san!',            desc:'Descobriu o segredo do Fio Dourado.',req:s=>(s.caioActivations||0)>=1},
+  {id:'a48',icon:'🎌🎌',name:'Amigo do Caio',       desc:'Caio-san ajudou 5 vezes.',req:s=>(s.caioActivations||0)>=5},
 ];
-
 const EVENTS=[
-  {id:'wind',    name:'💨 VENTO FORTE!',            desc:'+200% produção por 30s',            dur:30,  type:'prod',  val:3},
-  {id:'monday',  name:'😱 SEGUNDA-FEIRA!',          desc:'+300% produção por 20s',            dur:20,  type:'prod',  val:4},
-  {id:'minox',   name:'💊 MINOXIDIL VENCIDO!',      desc:'-60% produção por 15s',             dur:15,  type:'prod',  val:.4},
-  {id:'exam',    name:'📝 PROVA AMANHÃ!',           desc:'+400% cliques por 20s',             dur:20,  type:'click', val:5},
-  {id:'mirror',  name:'🪞 VIU NO ESPELHO!',         desc:'+500% cliques por 15s',             dur:15,  type:'click', val:6},
-  {id:'bot',     name:'⚫ BOTAFOGO PERDEU!',        desc:'+1000% cliques por 10s',            dur:10,  type:'click', val:11},
-  {id:'barber',  name:'✂️ BARBEIRO ERRADO!',        desc:'+200% TUDO por 25s',                dur:25,  type:'all',   val:3},
-  {id:'extreme', name:'☠️ QUEDA EXTREMA!',          desc:'+3000% produção por 8s',            dur:8,   type:'prod',  val:31, special:'extreme'},
-  {id:'crash',   name:'💥 SERVIDOR CAIU!',          desc:'+500% prod por 20s',                dur:20,  type:'prod',  val:6},
-  {id:'tcc50',   name:'📚 50 TCCs!',                desc:'+600% TUDO por 18s',                dur:18,  type:'all',   val:7},
-  {id:'whats',   name:'📱 200 MSGS!',               desc:'+800% cliques por 12s',             dur:12,  type:'click', val:9},
-  {id:'dht',     name:'🧬 DHT TURBO!',              desc:'+2000% produção por 10s',           dur:10,  type:'prod',  val:21},
-  {id:'winupd',  name:'💿 WINDOWS UPDATE!',         desc:'+300% click / -50% prod por 20s',  dur:20,  type:'mixed', val:4, val2:.5},
-  {id:'gitforce',name:'🔥 GIT PUSH FORCE!',         desc:'+1500% TUDO por 12s',              dur:12,  type:'all',   val:16},
-  {id:'chatai',  name:'🤖 TURMA USOU IA!',          desc:'+2500% prod por 8s',               dur:8,   type:'prod',  val:26},
-  {id:'mec',     name:'📋 AUDITORIA MEC!',           desc:'-80% prod por 25s',                dur:25,  type:'prod',  val:.2},
-  {id:'power',   name:'⚡ QUEDA DE ENERGIA!',       desc:'+400% click por 15s',              dur:15,  type:'click', val:5},
-  {id:'defend',  name:'🎓 DEFESA AO VIVO!',         desc:'+1000% TUDO por 15s',              dur:15,  type:'all',   val:11},
-  {id:'hairday', name:'💆 DIA DO CABELO!',           desc:'+5000% produção por 5s',           dur:5,   type:'prod',  val:51},
-  {id:'quantum', name:'🌀 COLAPSO QUÂNTICO!',       desc:'+200% TUDO por 60s',               dur:60,  type:'all',   val:3},
-  {id:'coffee',  name:'☕ DÉCIMO CAFÉ!',            desc:'+1500% click por 20s',             dur:20,  type:'click', val:16},
-  {id:'rage',    name:'😤 RAIVA DO COLEGIADO!',     desc:'+800% TUDO por 22s',               dur:22,  type:'all',   val:9},
+  {id:'wind',   name:'💨 VENTO FORTE!',        desc:'+200% produção por 30s',          dur:30, type:'prod', val:3},
+  {id:'monday', name:'😱 SEGUNDA-FEIRA!',      desc:'+300% produção por 20s',          dur:20, type:'prod', val:4},
+  {id:'minox',  name:'💊 MINOXIDIL VENCIDO!',  desc:'-60% produção por 15s',           dur:15, type:'prod', val:.4},
+  {id:'exam',   name:'📝 PROVA AMANHÃ!',       desc:'+400% cliques por 20s',           dur:20, type:'click',val:5},
+  {id:'mirror', name:'🪞 VIU NO ESPELHO!',     desc:'+500% cliques por 15s',           dur:15, type:'click',val:6},
+  {id:'bot',    name:'⚫ BOTAFOGO PERDEU!',    desc:'+1000% cliques por 10s',          dur:10, type:'click',val:11},
+  {id:'barber', name:'✂️ BARBEIRO ERRADO!',    desc:'+200% TUDO por 25s',             dur:25, type:'all',  val:3},
+  {id:'extreme',name:'☠️ QUEDA EXTREMA!',      desc:'+3000% produção por 8s',          dur:8,  type:'prod', val:31,special:'extreme'},
+  {id:'crash',  name:'💥 SERVIDOR CAIU!',      desc:'+500% prod por 20s',              dur:20, type:'prod', val:6},
+  {id:'tcc50',  name:'📚 50 TCCs!',            desc:'+600% TUDO por 18s',             dur:18, type:'all',  val:7},
+  {id:'dht',    name:'🧬 DHT TURBO!',          desc:'+2000% produção por 10s',         dur:10, type:'prod', val:21},
+  {id:'winupd', name:'💿 WINDOWS UPDATE!',     desc:'+300%click/-50%prod por 20s',    dur:20, type:'mixed',val:4,val2:.5},
+  {id:'gitforce',name:'🔥 GIT PUSH FORCE!',   desc:'+1500% TUDO por 12s',            dur:12, type:'all',  val:16},
+  {id:'coffee', name:'☕ DÉCIMO CAFÉ!',        desc:'+1500% click por 20s',           dur:20, type:'click',val:16},
+  {id:'rage',   name:'😤 RAIVA COLEGIADO!',    desc:'+800% TUDO por 22s',             dur:22, type:'all',  val:9},
+  {id:'mec',    name:'📋 AUDITORIA MEC!',       desc:'-80% prod por 25s',              dur:25, type:'prod', val:.2},
+  {id:'defend', name:'🎓 DEFESA AO VIVO!',     desc:'+1000% TUDO por 15s',            dur:15, type:'all',  val:11},
+  {id:'hairday',name:'💆 DIA DO CABELO!',      desc:'+5000% prod por 5s',             dur:5,  type:'prod', val:51},
 ];
-
 const GOLDEN_TYPES=[
-  {id:'lucky',       name:'🍀 FIO DA SORTE!',       val_label:'',      type:'lucky'},
-  {id:'frenzy',      name:'⚡ FRENZY!',             val_label:'×7 prod por 77s',  type:'prod', val:7,   dur:77},
-  {id:'clickfrenzy', name:'🖱️ CLICK FRENZY!',       val_label:'×777 click 13s',  type:'click',val:777, dur:13},
-  {id:'elder',       name:'👴 OS ALUNOS!',           val_label:'×6 tudo por 66s', type:'all',  val:6,   dur:66},
-  {id:'chain',       name:'🔗 FIO DE OURO!',         val_label:'+1h de produção',  type:'time'},
-  {id:'blessing',    name:'✨ BÊNÇÃO CAPILAR!',      val_label:'+7% prod ×3min',  type:'prod', val:1.07,dur:180},
+  {id:'lucky',      name:'🍀 FIO DA SORTE!',   type:'lucky'},
+  {id:'frenzy',     name:'⚡ FRENZY!',         val_label:'×7 prod 77s', type:'prod', val:7,  dur:77},
+  {id:'clickfrenzy',name:'🖱️ CLICK FRENZY!',  val_label:'×777 click 13s',type:'click',val:777,dur:13},
+  {id:'elder',      name:'👴 OS ALUNOS!',       val_label:'×6 tudo 66s', type:'all',  val:6,  dur:66},
+  {id:'chain',      name:'🔗 FIO DE OURO!',     val_label:'+1h produção', type:'time'},
+  {id:'blessing',   name:'✨ BÊNÇÃO CAPILAR!',  val_label:'+7% prod 3min',type:'prod', val:1.07,dur:180},
 ];
-
-const NEWS=[
-  'PROF. KARLAN NEGA CALVÍCIE: "É REFLEXO DA LÂMPADA LED"',
-  'ALUNO ENTREGA TCC GERADO POR IA — SEM LER UMA LINHA',
-  'REUNIÃO DE COLEGIADO: 4H PARA MUDAR FONTE DO CABEÇALHO',
-  'SERVIDOR CAI NO EXATO MOMENTO DA PROVA FINAL',
-  'GRUPO DO WHATSAPP: 300 MENSAGENS — ZERO CONTEÚDO',
-  'PROJETOR SEM HDMI: PROF. APRESENTA NO CELULAR DO ALUNO',
-  '"CAI NA PROVA?" — PERGUNTADO DURANTE A PRÓPRIA PROVA',
-  'PHP DE 2003 SOBREVIVE A TODAS AS ATUALIZAÇÕES',
-  'WINDOWS UPDATE DURANTE AULA: ALUNOS AGRADECEM A PAUSA',
-  'TCC DEVOLVIDO PELA 5ª VEZ: ORIENTADOR EM LICENÇA',
-  'GIT PUSH --FORCE EM PROD: ESTAGIÁRIO DESAPARECEU',
-  'SABESP: CLORO É ANTI-CABELO CERTIFICADO PELO MEC',
-  'NOTA NEGATIVA DO MEC: DIREÇÃO CULPA O PROF. DE TI',
-  'OBSERVAR O CABELO FAZ ELE CAIR: PRINCÍPIO DE KARLAN',
-  'FIO DOURADO AVISTADO NO COURO CABELUDO: TESTEMUNHAS CHOCADAS',
-  'CASPA PREMIADA COMO PRODUTO MAIS INOVADOR DO SEMESTRE',
-  'LAB ALOPECIA: "IRREVERSÍVEL. BOA SORTE. DESCULPE."',
-  'SINGULARIDADE QUÂNTICA DETECTADA EM SALA 302',
-  'ALUNO EXPLICA ALGORITMO PARA O PROF. — AMBOS CONFUSOS',
-  'STACK OVERFLOW FORA DO AR: CURSO DE TI SUSPENSO',
-  'CHATGPT 6.0: AGORA REPROVA AUTOMATICAMENTE PLÁGIOS',
-  'KARLAN PRIME CONFIRMADO: FORMA FINAL REVELADA',
-  'PORTA DO DHT: NOVA ENTRADA NA FACULDADE',
-  'REUNIÃO ÀS 7H: 0 PRESENTES. 3 EMAILS ENVIADOS.',
-  'FIO DOURADO: APENAS 1% DOS PROFS CONSEGUE CLICAR',
-];
-
+// STAGES usa G.tf (fios da run atual — reseta no prestígio!)
+// Isso faz o cabelo voltar à Fase I depois de cada prestígio
 const STAGES=[
-  {at:0,       lbl:'FASE I — CABELO COMPLETO',   hs:0},
-  {at:600,     lbl:'FASE II — ENTRADAS',          hs:1},
-  {at:6000,    lbl:'FASE III — CALVA CENTRAL',    hs:2},
-  {at:60000,   lbl:'FASE IV — FERRADURA',         hs:3},
-  {at:250000,  lbl:'FASE V — ÚLTIMOS FIOS',       hs:4},
-  {at:700000,  lbl:'FASE VI — CARECA TOTAL',      hs:5},
+  {at:0,      lbl:'FASE I — CABELO COMPLETO',  hs:0},
+  {at:600,    lbl:'FASE II — ENTRADAS',         hs:1},
+  {at:6000,   lbl:'FASE III — CALVA CENTRAL',   hs:2},
+  {at:60000,  lbl:'FASE IV — FERRADURA',         hs:3},
+  {at:250000, lbl:'FASE V — ÚLTIMOS FIOS',       hs:4},
+  {at:700000, lbl:'FASE VI — CARECA TOTAL',      hs:5},
 ];
+const BALD_MAX=STAGES[5].at; // 700 000 — barra de calvície resetável
 const WIN_AT=3e15;
 const MAX_HAIRS=40;
+const NEWS=[
+  'PROF. KARLAN NEGA CALVÍCIE: "É REFLEXO DA LÂMPADA LED"',
+  'ALUNO ENTREGA TCC IA — SEM LER UMA LINHA SEQUER',
+  'REUNIÃO 4H PARA MUDAR FONTE DO CABEÇALHO DO RELATÓRIO',
+  'SERVIDOR CAI NO EXATO MOMENTO DA PROVA FINAL',
+  'GRUPO WHATSAPP: 300 MENSAGENS — ZERO CONTEÚDO ÚTIL',
+  'PROJETOR SEM HDMI: PROF. APRESENTA NO CELULAR DO ALUNO',
+  '"CAI NA PROVA?" — PERGUNTADO DURANTE A PRÓPRIA PROVA',
+  'PHP DE 2003 SOBREVIVE A TODAS AS ATUALIZAÇÕES MODERNAS',
+  'WINDOWS UPDATE DURANTE AULA: ALUNOS AGRADECEM À PAUSA',
+  'TCC DEVOLVIDO PELA 5ª VEZ: ORIENTADOR ENTROU EM LICENÇA',
+  'GIT PUSH --FORCE EM PROD: ESTAGIÁRIO DESAPARECEU',
+  'SABESP CERTIFICA: CLORO É ANTI-CABELO OFICIAL DO MEC',
+  'OBSERVAR O CABELO FAZ ELE CAIR: PRINCÍPIO DE KARLAN',
+  'FIO DOURADO AVISTADO NO COURO CABELUDO: TESTEMUNHAS CHOCADAS',
+  'CAIO-SAN! JAPONÊS DE CABELOS LONGOS AVISTADO NA FACULDADE!',
+  'EASTER EGG: CLIQUE DIREITO NO FIO DOURADO... DIZEM AS LENDAS',
+  'KARLAN PRIME CONFIRMADO: FORMA FINAL REVELADA AO MUNDO',
+  'CASPA PREMIADA COMO PRODUTO MAIS INOVADOR DO SEMESTRE',
+  'SINGULARIDADE QUÂNTICA DETECTADA NA SALA 302 — EVACUEM!',
+  'ALUNO EXPLICA ALGORITMO AO PROF — AMBOS FICAM CONFUSOS',
+  'CHATGPT REPROVA AUTOMATICAMENTE SEUS PRÓPRIOS PLÁGIOS',
+  'REUNIÃO ÀS 7H: 0 PRESENTES. 3 EMAILS. 1 ATA INVENTADA.',
+  'NOVA DIMENSÃO ANTI-CAPILAR INAUGURADA NO CAMPUS NORTE',
+  'STACK OVERFLOW FORA DO AR: CURSO DE TI INTEIRO SUSPENSO',
+];
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// DOM CACHE (elimina getElementById no hot path)
+// ═══════════════════════════════════════════════════════
+let $={};
+
+// ═══════════════════════════════════════════════════════
 // STATE
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
 function newState(){
   return{fios:0,tf:0,atf:0,tc:0,caspa:0,tCaspa:0,pres:0,
     bld:Object.fromEntries(BUILDINGS.map(b=>[b.id,0])),
     cu:{},bu:{},csu:{},ach:[],
     startTime:Date.now(),lastOnline:Date.now(),
-    eventsTotal:0,hadExtreme:false,combosTotal:0,goldenClicks:0,
-    tps:0,cp:1,ePM:1,eCM:1,eEnd:0,eActive:null,
+    eventsTotal:0,hadExtreme:false,combosTotal:0,
+    goldenClicks:0,caioActivations:0,inTop100:false,
+    evPM:1,evCM:1,evEnd:0,evActive:null,
+    gfPM:1,gfCM:1,
     nextEv:Date.now()+rand(60000,120000),
     nextGolden:Date.now()+rand(180000,420000),
-    playtime:0};
+    tps:0,cp:1,playtime:0};
 }
 let G=newState();
 function totBld(s){return Object.values(s.bld).reduce((a,b)=>a+b,0)}
 let buyMult=1;
-// dirty flags
 const dirty={bld:true,upg:true,pres:true,stats:true};
 function markDirty(){dirty.bld=true;dirty.upg=true;dirty.pres=true;dirty.stats=true}
 
-// ════════════════════════════════════════════
-// COMPUTE
-// ════════════════════════════════════════════
-function forcaMultiplier(){return 1+G.ach.length*.01} // +1% per achievement
-function compute(){
-  let cp=1,pm=1,cm=1;
-  for(const u of CLICK_UPGRADES) if(G.cu[u.id]) cp+=u.bonus;
-  for(const u of CASPA_UPGRADES) if(G.csu[u.id]){pm*=u.pm;cm*=u.cm}
-  const fc=forcaMultiplier();
-  G.cp=Math.ceil(cp*cm*G.eCM*fc);
-  let ps=0;
-  for(const b of BUILDINGS){
-    const n=G.bld[b.id]||0; if(!n) continue;
-    let bm=1;
-    for(const t of BLD_TIERS){const k=b.id+'_'+t.count;if(n>=t.count&&G.bu[k])bm*=t.mult}
-    ps+=n*b.basePs*bm*pm;
-  }
-  G.tps=ps*G.ePM*fc;
+// ═══════════════════════════════════════════════════════
+// CAIO EASTER EGG
+// Trigger: CLIQUE DIREITO no Fio Dourado quando ele aparecer
+// Efeito: Caio-san aparece e dá cabelos ao Karlan!
+//   Fase atual → reduz 3 fases (min Fase I) por 60 segundos
+//   Ex: Fase VI→III, Fase V→II, Fase IV→I
+// ═══════════════════════════════════════════════════════
+let caioOffset=0;    // offset que reduz o índice da fase
+let caioActive=false;
+let caioInterv=null;
+let caioSecsLeft=0;
+
+// getRealStageIdx: fase real baseada em G.tf (reseta no prestígio!)
+function getRealStageIdx(){
+  let i=0;
+  for(let j=0;j<STAGES.length;j++) if(G.tf>=STAGES[j].at) i=j;
+  return i;
+}
+// getStageIdx: fase visível (com offset do Caio aplicado)
+function getStageIdx(){
+  return Math.max(0,getRealStageIdx()-caioOffset);
 }
 
-// ════════════════════════════════════════════
-// SAVE / LOAD
-// ════════════════════════════════════════════
-function saveGame(silent=false){
-  const d={fios:G.fios,tf:G.tf,atf:G.atf,tc:G.tc,caspa:G.caspa,tCaspa:G.tCaspa,
-    pres:G.pres,bld:G.bld,cu:G.cu,bu:G.bu,csu:G.csu,ach:G.ach,
-    startTime:G.startTime,lastOnline:Date.now(),
-    eventsTotal:G.eventsTotal,hadExtreme:G.hadExtreme,
-    combosTotal:G.combosTotal,goldenClicks:G.goldenClicks,playtime:G.playtime};
-  try{localStorage.setItem('karlanINF',JSON.stringify(d));if(!silent)showToast('💾 Salvo!')}
-  catch(e){console.error('[SAVE]',e.message)}
-}
-function loadSave(){
-  const raw=localStorage.getItem('karlanINF'); if(!raw) return false;
-  try{
-    const d=JSON.parse(raw);
-    if(typeof d.fios!=='number') throw new Error('schema inválido');
-    Object.assign(G,d);
-    const off=Math.min(7200,(Date.now()-(d.lastOnline||Date.now()))/1000);
-    G.ePM=1;G.eCM=1;G.eEnd=0;G.eActive=null;
-    G.nextEv=Date.now()+rand(60000,120000);
-    G.nextGolden=Date.now()+rand(30000,90000);
-    compute();
-    if(off>10){const gain=G.tps*off*.5;if(gain>0){G.fios+=gain;G.tf+=gain;G.atf+=gain;
-      setTimeout(()=>showToast('⏰ Offline: +'+fmt(gain)+' fios ('+Math.round(off)+'s)'),1000)}}
-    if(G.pres>0) showCaspaUI();
-    return true;
-  }catch(e){console.error('[LOAD]',e.message);G=newState();return false}
-}
-function confirmReset(){
-  if(confirm('RESETAR TUDO?\nTodo progresso apagado para sempre!')){
-    localStorage.removeItem('karlanINF');
-    won=false;gfActive=false;document.getElementById('goldenFio').style.display='none';
-    G=newState();compute();markDirty();rebuildAll();updateUI();
-    document.getElementById('brutal').style.display='none';
-  }
+function triggerCaio(){
+  if(caioActive){showToast('🎌 Caio-san já está aqui!');return}
+  const realIdx=getRealStageIdx();
+  if(realIdx<1){showToast('🎌 Caio apareceu... mas Karlan ainda tem cabelo!');return}
+
+  caioActive=true;
+  G.caioActivations=(G.caioActivations||0)+1;
+  caioOffset=Math.min(3,realIdx); // reduz até 3 fases
+  caioSecsLeft=60;
+
+  // Flash verde (efeito positivo!)
+  const fl=$.flashOverlay;
+  fl.style.background='radial-gradient(ellipse at center,rgba(0,220,100,.35) 0%,transparent 65%)';
+  fl.style.opacity='1';
+  setTimeout(()=>{fl.style.opacity='0';setTimeout(()=>{fl.style.background='';},200);},500);
+
+  // Atualiza hint
+  const hint=document.getElementById('caioHint');
+  hint.textContent='▲ '+caioOffset+' FASE'+(caioOffset>1?'S':'')+' DE CABELO!';
+  hint.style.display='block';
+
+  // Mostra Caio deslizando da direita
+  document.getElementById('caioOverlay').classList.add('show');
+
+  // Burst de hairs
+  for(let i=0;i<55;i++) setTimeout(()=>spawnHairs(4,true),i*45);
+
+  showToast('🎌 CAIO-SAN! Karlan ganhou +'+caioOffset+' fase'+(caioOffset>1?'s':'')+' de cabelo por 60s!');
+
+  // Caio vai embora após 7s (mas o efeito continua)
+  setTimeout(()=>{
+    document.getElementById('caioOverlay').classList.remove('show');
+    document.getElementById('caioHint').style.display='none';
+  },7000);
+
+  // Conta regressiva — efeito dura 60 segundos
+  clearInterval(caioInterv);
+  caioInterv=setInterval(()=>{
+    caioSecsLeft--;
+    const ttxt=document.getElementById('caioTimerTxt');
+    if(ttxt) ttxt.textContent=caioOffset>0?'⏱ Cabelo restaurado: '+caioSecsLeft+'s':'';
+    if(caioSecsLeft<=0){
+      clearInterval(caioInterv);
+      caioOffset=0;caioActive=false;
+      if(ttxt) ttxt.textContent='';
+      showToast('💇 Os fios emprestados pelo Caio-san caíram...');
+      for(let i=0;i<20;i++) setTimeout(()=>spawnHairs(3,false),i*60);
+    }
+  },1000);
+
+  checkAch();
 }
 
-// ════════════════════════════════════════════
-// DUAL-BUTTON CLICK
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// AUTH SYSTEM (localStorage — pronto para trocar por Django API)
+// ═══════════════════════════════════════════════════════
+// DJANGO: POST /api/auth/login/ {username, password} → {token, user}
+//         POST /api/auth/register/ {username, password} → {token, user}
+//         Armazenar token em localStorage e enviar como Bearer header
+let currentUser=null;
+let authIsRegister=false;
+
+function simpleHash(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h)^s.charCodeAt(i);return(h>>>0).toString(36)}
+function getUsers(){try{return JSON.parse(localStorage.getItem('kc_users')||'{}')}catch{return{}}}
+
+function doRegister(u,p){
+  if(!u||u.length<3)return{ok:false,err:'Nome muito curto (mínimo 3 letras)'};
+  if(!/^[a-zA-Z0-9_]+$/.test(u))return{ok:false,err:'Só letras, números e _'};
+  if(!p||p.length<4)return{ok:false,err:'Senha muito curta (mínimo 4 chars)'};
+  const users=getUsers();
+  if(users[u])return{ok:false,err:'Nome de usuário já existe!'};
+  users[u]={h:simpleHash(p),ts:Date.now()};
+  localStorage.setItem('kc_users',JSON.stringify(users));
+  return{ok:true};
+}
+function doLogin(u,p){
+  const users=getUsers();
+  if(!users[u])return{ok:false,err:'Usuário não encontrado!'};
+  if(users[u].h!==simpleHash(p))return{ok:false,err:'Senha incorreta!'};
+  return{ok:true};
+}
+function setSession(u){
+  currentUser={username:u};
+  localStorage.setItem('kc_session',u);
+  updateUserDisplay();
+}
+function loadSession(){
+  const u=localStorage.getItem('kc_session');
+  if(u){currentUser={username:u};updateUserDisplay();return true}
+  return false;
+}
+function doLogout(){
+  currentUser=null;
+  localStorage.removeItem('kc_session');
+  updateUserDisplay();
+  hideUserModal();
+  showToast('👋 Sessão encerrada');
+  showLoginModal();
+}
+function updateUserDisplay(){
+  const el=$.userDisplay;if(!el)return;
+  if(currentUser){el.textContent='👤 '+currentUser.username;el.style.color='var(--gold2)'}
+  else{el.textContent='👤 GUEST';el.style.color='var(--dim)'}
+}
+
+// UI de autenticação
+function showLoginModal(){document.getElementById('loginModal').classList.remove('hidden')}
+function hideLoginModal(){document.getElementById('loginModal').classList.add('hidden')}
+function toggleAuthMode(){
+  authIsRegister=!authIsRegister;
+  document.getElementById('authTitle').textContent=authIsRegister?'CADASTRAR':'LOGIN';
+  document.getElementById('authSubmitBtn').textContent=authIsRegister?'CRIAR CONTA':'ENTRAR';
+  document.getElementById('authSwitchTxt').textContent=authIsRegister?'Já tem conta?':'Não tem conta?';
+  document.getElementById('authSwitchBtn').textContent=authIsRegister?'FAZER LOGIN':'CADASTRAR';
+  document.getElementById('authErr').textContent='';
+}
+function submitAuth(){
+  const u=document.getElementById('authUser').value.trim();
+  const p=document.getElementById('authPass').value;
+  const result=authIsRegister?doRegister(u,p):doLogin(u,p);
+  if(!result.ok){document.getElementById('authErr').textContent=result.err;return}
+  setSession(u);
+  hideLoginModal();
+  updateLBEntry();
+  showToast('👤 Bem-vindo, '+u+'! Score salvo no ranking.');
+}
+function skipAuth(){hideLoginModal();showToast('Jogando como visitante — sem ranking!')}
+
+function onUserClick(){if(currentUser)showUserModal();else showLoginModal()}
+function showUserModal(){
+  document.getElementById('umName').textContent='👤 '+currentUser.username;
+  document.getElementById('umAtf').textContent=fmt(G.atf);
+  document.getElementById('umPres').textContent=G.pres;
+  document.getElementById('umAch').textContent=G.ach.length+'/'+ACHIEVEMENTS.length;
+  document.getElementById('userModal').classList.remove('hidden');
+}
+function hideUserModal(){document.getElementById('userModal').classList.add('hidden')}
+
+// ═══════════════════════════════════════════════════════
+// LEADERBOARD — TOP 100 (localStorage + API-ready)
+// ═══════════════════════════════════════════════════════
+// DJANGO INTEGRATION:
+//   Model: class Score(models.Model):
+//     user = models.OneToOneField(User, on_delete=models.CASCADE)
+//     atf = models.BigIntegerField(default=0)
+//     pres = models.IntegerField(default=0)
+//     ach_count = models.IntegerField(default=0)
+//     updated_at = models.DateTimeField(auto_now=True)
+//   Serializer: ScoreSerializer(ModelSerializer)
+//   ViewSet: filtrar top 100 por atf desc
+//   URL: /api/leaderboard/ (GET list, POST upsert autenticado)
+const LB_KEY='kc_lb_v2';
+const BR_NAMES=[
+  'MatheusXP','BrunoCareca','LucasCode','FernandoT','AndreCS',
+  'RafaDev','CarlosBald','TiagoPHP','GuilhPy','PedroSQL',
+  'VitorJS','LeonardoN','DiogoDB','FabioHT','MarceloPB',
+  'RicardoAP','EdersonLM','AlexMG','EduardoRS','MiguelCA',
+  'IsaacBH','NatanRA','SamuelTV','LuisFF','GabrielN',
+  'HenriqueD','KevinPy','BrunoBT','JoaoP','ThiagoS',
+  'YuriDev','CaioLongHair','DanielC','FilipeJS','OtavioSQL',
+  'RenanPHP','IsabellaDev','BeaCode','ClaraJS','DiogoAPI',
+  'CaioSensei','AlvesRK','KarlanFan','CarecaMaster','ProfKarlan',
+];
+function seedLB(){
+  if(localStorage.getItem(LB_KEY)) return;
+  const entries=[];
+  for(let i=0;i<95;i++){
+    const nm=BR_NAMES[i%BR_NAMES.length]+(i>=BR_NAMES.length?Math.floor(i/BR_NAMES.length):'');
+    entries.push({
+      user:nm,
+      atf:Math.floor(9e15*Math.pow(0.91,i)),
+      pres:Math.max(0,Math.floor(50*Math.pow(0.85,i))),
+      ach:Math.max(0,Math.floor(ACHIEVEMENTS.length*Math.pow(0.90,i))),
+      ts:Date.now()-i*3600000,
+      fake:true
+    });
+  }
+  localStorage.setItem(LB_KEY,JSON.stringify({entries}));
+}
+function getLB(){try{return JSON.parse(localStorage.getItem(LB_KEY)||'null')}catch{return null}}
+function updateLBEntry(){
+  if(!currentUser)return;
+  const lb=getLB()||{entries:[]};
+  const idx=lb.entries.findIndex(e=>e.user===currentUser.username);
+  const entry={user:currentUser.username,atf:G.atf,pres:G.pres,ach:G.ach.length,ts:Date.now(),fake:false};
+  if(idx>=0){if(G.atf>=lb.entries[idx].atf)lb.entries[idx]=entry}
+  else lb.entries.push(entry);
+  lb.entries.sort((a,b)=>b.atf-a.atf);
+  lb.entries=lb.entries.slice(0,200);
+  localStorage.setItem(LB_KEY,JSON.stringify(lb));
+  // Verifica se está no top 100
+  const top100=lb.entries.slice(0,100);
+  G.inTop100=top100.some(e=>e.user===currentUser.username);
+}
+function showLeaderboard(){
+  updateLBEntry();
+  const lb=getLB();
+  if(!lb){showToast('❌ Ranking não disponível');return}
+  const top=lb.entries.slice(0,100);
+  const tbody=document.getElementById('lbBody');
+  tbody.innerHTML='';
+  let userRank=-1;
+  top.forEach((e,i)=>{
+    const isMe=currentUser&&e.user===currentUser.username;
+    if(isMe)userRank=i+1;
+    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1);
+    const tr=document.createElement('tr');
+    tr.className=isMe?'lb-me':'';
+    tr.innerHTML=`<td>${medal}</td>
+      <td>${e.user}${isMe?' 👈':''}</td>
+      <td style="color:var(--gold2)">${fmt(e.atf)}</td>
+      <td style="color:#d080f0">${e.pres}</td>
+      <td style="color:var(--gold3)">${e.ach}</td>`;
+    tbody.appendChild(tr);
+  });
+  const ri=document.getElementById('lbRankInfo');
+  if(currentUser)
+    ri.textContent=userRank>0?'🏅 Seu rank: #'+userRank+' de '+top.length+' jogadores':'Você ainda não está no top 100 — continue jogando!';
+  else
+    ri.textContent='Faça login para aparecer no ranking e competir!';
+  document.getElementById('lbModal').classList.remove('hidden');
+}
+function hideLbModal(){document.getElementById('lbModal').classList.add('hidden')}
+
+// ═══════════════════════════════════════════════════════
+// DUAL-BUTTON CLICK (L+R = combo)
+// ═══════════════════════════════════════════════════════
 let leftDown=false,rightDown=false;
 let comboMult=1;
 const COMBO_MAX=20,COMBO_DECAY=0.8;
+let comboWasMax=false;
 
 const headBtn=document.getElementById('headBtn');
 headBtn.addEventListener('mousedown',e=>{
   e.preventDefault();
-  if(e.button===0) leftDown=true;
-  if(e.button===2) rightDown=true;
-  if(!userMuted) tryAudio();
+  if(e.button===0)leftDown=true;
+  if(e.button===2)rightDown=true;
+  if(!userMuted)tryAudio();
   fireClick(e);
 },{passive:false});
 document.addEventListener('mouseup',e=>{if(e.button===0)leftDown=false;if(e.button===2)rightDown=false});
@@ -787,10 +1044,21 @@ document.addEventListener('mouseleave',()=>{leftDown=false;rightDown=false});
 headBtn.addEventListener('touchstart',e=>{e.preventDefault();fireClick(e.touches[0])},{passive:false});
 
 function fireClick(e){
-  if(won) return;
+  if(won)return;
   compute();
   const isBoth=leftDown&&rightDown;
-  if(isBoth){comboMult=Math.min(comboMult+0.5,COMBO_MAX);G.combosTotal=(G.combosTotal||0)+1}
+  if(isBoth){
+    comboMult=Math.min(comboMult+.5,COMBO_MAX);
+    G.combosTotal=(G.combosTotal||0)+1;
+    if(comboMult>=COMBO_MAX&&!comboWasMax){
+      comboWasMax=true;
+      const fl=$.flashOverlay;
+      fl.style.background='radial-gradient(ellipse at center,rgba(34,221,204,.3) 0%,transparent 65%)';
+      fl.style.opacity='1';
+      setTimeout(()=>{fl.style.opacity='0';setTimeout(()=>{fl.style.background='';},200)},250);
+      showToast('⚡⚡ COMBO MÁXIMO ×20!');
+    }
+  }else comboWasMax=false;
   const gain=Math.ceil(G.cp*(isBoth?comboMult:1));
   G.fios+=gain;G.tf+=gain;G.atf+=gain;G.tc++;
   const cp=document.getElementById('centerPanel');
@@ -798,226 +1066,245 @@ function fireClick(e){
   const ft=document.createElement('div');
   ft.className='float-fio';
   ft.textContent='+'+(isBoth?'⚡':'')+fmt(gain);
-  ft.style.color=isBoth?'#22ddcc':'#f5c842';
-  ft.style.left=(e.clientX-r.left-20)+'px';
-  ft.style.top=(e.clientY-r.top-10)+'px';
-  cp.appendChild(ft); setTimeout(()=>ft.remove(),920);
-  spawnHairs(Math.min(Math.ceil(gain/10)+1,isBoth?18:8),true);
-  headBtn.classList.remove('pop'); void headBtn.offsetWidth; headBtn.classList.add('pop');
+  ft.style.cssText='color:'+(isBoth?'#22ddcc':'#f5c842')+
+    ';left:'+(e.clientX-r.left-20)+'px;top:'+(e.clientY-r.top-10)+'px';
+  cp.appendChild(ft);setTimeout(()=>ft.remove(),920);
+  spawnHairs(Math.min(Math.ceil(gain/10)+1,isBoth?16:8),true);
+  headBtn.classList.remove('pop');void headBtn.offsetWidth;headBtn.classList.add('pop');
   setTimeout(()=>headBtn.classList.remove('pop'),140);
   quickUI();
 }
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // BUY MULTIPLIER
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 function setBuyMult(n){
   buyMult=n;
   document.querySelectorAll('#topbar .tb-btn').forEach(b=>b.classList.remove('active-mult'));
   document.getElementById('m'+n).classList.add('active-mult');
   dirty.bld=true;
 }
-function bldCostN(b,n){
-  // cost to buy n units: sum of geometric series
-  const owned=G.bld[b.id]||0;
-  const c=b.baseCost;
-  return Math.ceil(c*(Math.pow(1.15,owned)-Math.pow(1.15,owned+n))/(1-1.15)*-1*1);
-}
 function bldCost(b){return Math.ceil(b.baseCost*Math.pow(1.15,G.bld[b.id]||0))}
 
-// ════════════════════════════════════════════
-// AUDIO (fixed mute bug)
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// AUDIO
+// ═══════════════════════════════════════════════════════
 const audio=document.getElementById('bgAudio');
 let audioOn=false,userMuted=false;
-audio.volume=0.45;
-function tryAudio(){
-  if(userMuted) return;
-  audio.play().then(()=>{audioOn=true;updateAudioBtn()}).catch(()=>{});
-}
-function toggleAudio(){
-  if(!userMuted){userMuted=true;audioOn=false;audio.pause()}
-  else{userMuted=false;tryAudio()}
-  updateAudioBtn();
-}
-function updateAudioBtn(){document.getElementById('audioBtn').textContent=userMuted?'🔇':'🔊'}
+audio.volume=.45;
+function tryAudio(){if(userMuted||audioOn)return;audio.play().then(()=>{audioOn=true;updateAudioBtn()}).catch(()=>{})}
+function toggleAudio(){if(!userMuted){userMuted=true;audioOn=false;audio.pause()}else{userMuted=false;tryAudio()}updateAudioBtn()}
+function updateAudioBtn(){if($.audioBtn)$.audioBtn.textContent=userMuted?'🔇':'🔊'}
 
-// ════════════════════════════════════════════
-// SHOP
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// COMPUTE
+// ═══════════════════════════════════════════════════════
+function forcaMultiplier(){return 1+G.ach.length*.01}
+function compute(){
+  let cp=1,pm=1,cm=1;
+  for(const u of CLICK_UPGRADES)if(G.cu[u.id])cp+=u.bonus;
+  for(const u of CASPA_UPGRADES)if(G.csu[u.id]){pm*=u.pm;cm*=u.cm}
+  const fc=forcaMultiplier();
+  G.cp=Math.ceil(cp*cm*G.evCM*G.gfCM*fc);
+  let ps=0;
+  for(const b of BUILDINGS){
+    const n=G.bld[b.id]||0;if(!n)continue;
+    let bm=1;
+    for(const t of BLD_TIERS){const k=b.id+'_'+t.count;if(n>=t.count&&G.bu[k])bm*=t.mult}
+    ps+=n*b.basePs*bm*pm;
+  }
+  G.tps=ps*G.evPM*G.gfPM*fc;
+}
+
+// ═══════════════════════════════════════════════════════
+// SAVE / LOAD
+// ═══════════════════════════════════════════════════════
+function saveGame(silent=false){
+  const d={fios:G.fios,tf:G.tf,atf:G.atf,tc:G.tc,caspa:G.caspa,tCaspa:G.tCaspa,
+    pres:G.pres,bld:G.bld,cu:G.cu,bu:G.bu,csu:G.csu,ach:G.ach,
+    startTime:G.startTime,lastOnline:Date.now(),
+    eventsTotal:G.eventsTotal,hadExtreme:G.hadExtreme,
+    combosTotal:G.combosTotal,goldenClicks:G.goldenClicks,
+    caioActivations:G.caioActivations||0,inTop100:G.inTop100||false,
+    playtime:G.playtime||0};
+  try{localStorage.setItem('karlanINF',JSON.stringify(d));if(!silent)showToast('💾 Salvo!')}
+  catch(e){console.error('[SAVE]',e)}
+  if(!silent)updateLBEntry();
+}
+function loadSave(){
+  const raw=localStorage.getItem('karlanINF');if(!raw)return false;
+  try{
+    const d=JSON.parse(raw);
+    if(typeof d.fios!=='number')throw new Error('schema inválido');
+    Object.assign(G,d);
+    G.caioActivations=G.caioActivations||0;
+    G.inTop100=G.inTop100||false;
+    const off=Math.min(7200,(Date.now()-(d.lastOnline||Date.now()))/1000);
+    G.evPM=1;G.evCM=1;G.evEnd=0;G.evActive=null;
+    G.gfPM=1;G.gfCM=1;
+    G.nextEv=Date.now()+rand(60000,120000);
+    G.nextGolden=Date.now()+rand(30000,90000);
+    compute();
+    if(off>10){const gain=G.tps*off*.5;if(gain>0){G.fios+=gain;G.tf+=gain;G.atf+=gain;
+      setTimeout(()=>showToast('⏰ Offline: +'+fmt(gain)+' fios ('+Math.round(off)+'s)'),1000)}}
+    if(G.pres>0)showCaspaUI();
+    return true;
+  }catch(e){console.error('[LOAD]',e);G=newState();return false}
+}
+function confirmReset(){
+  if(!confirm('RESETAR TUDO?\nTodo progresso apagado para sempre!'))return;
+  localStorage.removeItem('karlanINF');
+  won=false;gfActive=false;
+  if($.goldenFio){$.goldenFio.style.display='none'}
+  caioActive=false;caioOffset=0;clearInterval(caioInterv);
+  document.getElementById('caioOverlay').classList.remove('show');
+  G=newState();compute();markDirty();rebuildAll();updateUI();
+  document.getElementById('brutal').style.display='none';
+}
+
+// ═══════════════════════════════════════════════════════
+// SHOP — prédios
+// ═══════════════════════════════════════════════════════
 function buyBld(id){
   const b=BUILDINGS.find(x=>x.id===id);
-  for(let i=0;i<buyMult;i++){
-    const c=bldCost(b);
-    if(G.fios<c) break;
-    G.fios-=c;G.bld[id]=(G.bld[id]||0)+1;
-  }
+  for(let i=0;i<buyMult;i++){const c=bldCost(b);if(G.fios<c)break;G.fios-=c;G.bld[id]=(G.bld[id]||0)+1}
   compute();markDirty();quickUI();
 }
 function buyClkUpg(id){
   const u=CLICK_UPGRADES.find(x=>x.id===id);
-  if(!u||G.cu[id]||G.fios<u.cost) return;
-  G.fios-=u.cost;G.cu[id]=true;
-  compute();dirty.upg=true;quickUI();showToast('✓ '+u.name);
+  if(!u||G.cu[id]||G.fios<u.cost)return;
+  G.fios-=u.cost;G.cu[id]=true;compute();dirty.upg=true;quickUI();showToast('✓ '+u.name);
 }
 function buyBldUpg(bId,cnt){
   const key=bId+'_'+cnt;if(G.bu[key])return;
   const b=BUILDINGS.find(x=>x.id===bId),t=BLD_TIERS.find(x=>x.count===cnt);
   const cost=Math.ceil(b.baseCost*t.cm);if(G.fios<cost)return;
-  G.fios-=cost;G.bu[key]=true;
-  compute();dirty.upg=true;dirty.bld=true;quickUI();showToast('✓ '+b.name+' Nv '+t.lbl);
+  G.fios-=cost;G.bu[key]=true;compute();dirty.upg=true;dirty.bld=true;quickUI();
+  showToast('✓ '+b.name+' Nv '+t.lbl);
 }
 function buyCaspaUpg(id){
   const u=CASPA_UPGRADES.find(x=>x.id===id);
-  if(!u||G.csu[id]||G.caspa<u.cost) return;
-  G.caspa-=u.cost;G.csu[id]=true;
-  compute();dirty.pres=true;dirty.stats=true;quickUI();showToast('💜 '+u.name);
+  if(!u||G.csu[id]||G.caspa<u.cost)return;
+  G.caspa-=u.cost;G.csu[id]=true;compute();dirty.pres=true;quickUI();showToast('💜 '+u.name);
 }
-function caspaGain(){return Math.max(0,Math.floor(Math.sqrt(G.atf/1000000))-G.tCaspa)}
+function caspaGain(){return Math.max(0,Math.floor(Math.sqrt(G.atf/1e6))-G.tCaspa)}
+function showCaspaUI(){document.getElementById('caspaStat').style.display='flex'}
+
+// PRESTÍGIO — volta para Fase I graças ao G.tf=0!
 function doPrestige(){
   const gain=caspaGain();
-  if(gain<=0){showToast('❌ Fios insuficientes!');return}
-  if(!confirm('PRESTÍGIO?\n+'+gain+' Caspa\nReset fios, prédios, melhorias\nMantém caspa, conquistas e upgrades eternos'))return;
+  if(gain<=0){showToast('❌ Fios insuficientes para prestígio!');return}
+  if(!confirm('PRESTÍGIO?\n+'+gain+' Caspa\nO cabelo VOLTA À FASE I — ciclo recomeça!\nMantém: caspa, conquistas, upgrades de caspa'))return;
   G.caspa+=gain;G.tCaspa+=gain;G.pres++;
-  G.fios=0;G.tf=0;G.bld=Object.fromEntries(BUILDINGS.map(b=>[b.id,0]));
+  G.fios=0;G.tf=0; // ← G.tf=0 faz o cabelo voltar para Fase I automaticamente!
+  G.bld=Object.fromEntries(BUILDINGS.map(b=>[b.id,0]));
   G.cu={};G.bu={};
-  compute();markDirty();rebuildAll();updateUI();showCaspaUI();
-  showToast('💜 Prestígio '+G.pres+'! +'+gain+' Caspa');
-}
-function showCaspaUI(){
-  document.getElementById('caspaStat').style.display='flex';
+  // Reseta Caio ao prestigiar
+  caioOffset=0;caioActive=false;clearInterval(caioInterv);
+  document.getElementById('caioTimerTxt').textContent='';
+  document.getElementById('caioOverlay').classList.remove('show');
+  compute();markDirty();
+
+  // Flash roxo de prestígio
+  const pf=document.getElementById('prestigeFlash');
+  pf.style.opacity='1';setTimeout(()=>{pf.style.opacity='0';},500);
+  // Cabelo "explode" ao prestigiar
+  for(let i=0;i<100;i++) setTimeout(()=>spawnHairs(3,true),i*15);
+
+  rebuildAll();updateUI();showCaspaUI();updateLBEntry();
+  showToast('💜 PRESTÍGIO '+G.pres+'! +'+gain+' Caspa. FASE I — Ciclo recomeça!');
 }
 
-// ════════════════════════════════════════════
-// GOLDEN FIO (Cookie equivalent)
-// ════════════════════════════════════════════
-let gfActive=false,gfTimer=0,gfEnd=0;
+// ═══════════════════════════════════════════════════════
+// GOLDEN FIO
+// EASTER EGG: Clique DIREITO no Fio Dourado → CAIO aparece!
+// ═══════════════════════════════════════════════════════
+let gfActive=false,gfEnd=0;
 const GF_LIFETIME=13;
 
 function spawnGoldenFio(){
-  if(gfActive||won) return;
-  gfActive=true;
-  gfEnd=Date.now()+GF_LIFETIME*1000;
-  const el=document.getElementById('goldenFio');
+  if(gfActive||won)return;
+  gfActive=true;gfEnd=Date.now()+GF_LIFETIME*1000;
+  const el=$.goldenFio;
   const cp=document.getElementById('centerPanel');
   const r=cp.getBoundingClientRect();
-  // random position within center area
-  const x=80+Math.random()*(r.width-160);
-  const y=80+Math.random()*(r.height-200);
-  el.style.left=x+'px';el.style.top=y+'px';
+  el.style.left=(80+Math.random()*(r.width-160))+'px';
+  el.style.top=(80+Math.random()*(r.height-200))+'px';
   el.style.display='block';
-  document.getElementById('goldenTimer').style.display='flex';
-  // pick type
+  $.goldenTimer.style.display='flex';
   const type=GOLDEN_TYPES[Math.floor(Math.random()*GOLDEN_TYPES.length)];
   el.dataset.gtype=type.id;
-  // icon
-  const icons={lucky:'🍀',frenzy:'⚡',clickfrenzy:'🖱️',elder:'👴',chain:'🔗',blessing:'✨'};
-  el.querySelector('.gf-icon').textContent=icons[type.id]||'🌟';
+  el.querySelector('.gf-icon').textContent={lucky:'🍀',frenzy:'⚡',clickfrenzy:'🖱️',elder:'👴',chain:'🔗',blessing:'✨'}[type.id]||'🌟';
 }
 
 function clickGoldenFio(){
-  if(!gfActive) return;
-  gfActive=false;
-  document.getElementById('goldenFio').style.display='none';
-  document.getElementById('goldenTimer').style.display='none';
+  if(!gfActive)return;
+  gfActive=false;$.goldenFio.style.display='none';$.goldenTimer.style.display='none';
   G.goldenClicks=(G.goldenClicks||0)+1;
-
-  const typeId=document.getElementById('goldenFio').dataset.gtype;
+  const typeId=$.goldenFio.dataset.gtype;
   const type=GOLDEN_TYPES.find(t=>t.id===typeId)||GOLDEN_TYPES[0];
   let bonusLabel='';
-
-  if(type.id==='lucky'){
-    const bonus=Math.max(G.fios*.15,G.tps*900);
-    G.fios+=bonus;G.tf+=bonus;G.atf+=bonus;
-    bonusLabel='+'+fmt(bonus)+' fios!';
-  }else if(type.id==='chain'){
-    const bonus=G.tps*3600;
-    G.fios+=bonus;G.tf+=bonus;G.atf+=bonus;
-    bonusLabel='+'+fmt(bonus)+' fios (1h prod)!';
-  }else if(type.type==='prod'){
-    // apply multiplier
-    const oldEM=G.ePM;G.ePM=type.val;compute();
-    setTimeout(()=>{G.ePM=oldEM;compute();markDirty()},type.dur*1000);
-    bonusLabel=type.val_label;
-  }else if(type.type==='click'){
-    const oldCM=G.eCM;G.eCM=type.val;compute();
-    setTimeout(()=>{G.eCM=oldCM;compute();markDirty()},type.dur*1000);
-    bonusLabel=type.val_label;
-  }else if(type.type==='all'){
-    const oldEM=G.ePM,oldCM=G.eCM;
-    G.ePM=type.val;G.eCM=type.val;compute();
-    setTimeout(()=>{G.ePM=oldEM;G.eCM=oldCM;compute();markDirty()},type.dur*1000);
-    bonusLabel=type.val_label;
-  }
-
-  // flash screen gold
-  const fl=document.getElementById('flashOverlay');
-  fl.style.opacity='1'; setTimeout(()=>{fl.style.opacity='0'},200);
-
-  // popup
-  const gfp=document.getElementById('gfPopup');
+  if(type.id==='lucky'){const b=Math.max(G.fios*.15,G.tps*900);G.fios+=b;G.tf+=b;G.atf+=b;bonusLabel='+'+fmt(b)+' fios!';}
+  else if(type.id==='chain'){const b=G.tps*3600;G.fios+=b;G.tf+=b;G.atf+=b;bonusLabel='+'+fmt(b)+' fios (1h)!';}
+  else if(type.type==='prod'){G.gfPM=type.val;compute();setTimeout(()=>{G.gfPM=1;compute();markDirty()},type.dur*1000);bonusLabel=type.val_label||'';}
+  else if(type.type==='click'){G.gfCM=type.val;compute();setTimeout(()=>{G.gfCM=1;compute();markDirty()},type.dur*1000);bonusLabel=type.val_label||'';}
+  else if(type.type==='all'){G.gfPM=type.val;G.gfCM=type.val;compute();setTimeout(()=>{G.gfPM=1;G.gfCM=1;compute();markDirty()},type.dur*1000);bonusLabel=type.val_label||'';}
+  const fl=$.flashOverlay;
+  fl.style.background='radial-gradient(ellipse at center,rgba(255,215,0,.22) 0%,transparent 65%)';
+  fl.style.opacity='1';setTimeout(()=>{fl.style.opacity='0';},200);
   document.getElementById('gfPopName').textContent=type.name;
   document.getElementById('gfPopVal').textContent=bonusLabel;
-  gfp.classList.add('show');
+  const gfp=document.getElementById('gfPopup');gfp.classList.add('show');
   setTimeout(()=>gfp.classList.remove('show'),2200);
-
-  // spawn frenzy hairs
   for(let i=0;i<30;i++) setTimeout(()=>spawnHairs(3,true),i*40);
-
-  // next golden
   G.nextGolden=Date.now()+rand(180000,420000);
   quickUI();checkAch();
 }
 
 function tickGolden(){
-  if(!gfActive) return;
+  if(!gfActive)return;
   const rem=Math.max(0,(gfEnd-Date.now())/1000);
-  document.getElementById('gfCountdown').textContent=Math.ceil(rem)+'s';
-  document.getElementById('goldenTimer').textContent='🌟 FIO DOURADO! '+Math.ceil(rem)+'s';
-  if(rem<=0){
-    gfActive=false;
-    document.getElementById('goldenFio').style.display='none';
-    document.getElementById('goldenTimer').style.display='none';
-    G.nextGolden=Date.now()+rand(180000,420000);
-  }
+  $.gfCountdown.textContent=Math.ceil(rem)+'s';
+  $.goldenTimer.textContent='🌟 FIO DOURADO! '+Math.ceil(rem)+'s';
+  if(rem<=0){gfActive=false;$.goldenFio.style.display='none';$.goldenTimer.style.display='none';G.nextGolden=Date.now()+rand(180000,420000)}
 }
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // EVENTS
-// ════════════════════════════════════════════
-function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+// ═══════════════════════════════════════════════════════
 function triggerEvent(){
   const ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];
-  G.eActive=ev;G.eEnd=Date.now()+ev.dur*1000;
-  if(ev.type==='prod')      {G.ePM=ev.val;G.eCM=1}
-  else if(ev.type==='click'){G.eCM=ev.val;G.ePM=1}
-  else if(ev.type==='all')  {G.ePM=ev.val;G.eCM=ev.val}
-  else if(ev.type==='mixed'){G.eCM=ev.val;G.ePM=ev.val2||1}
-  if(ev.special==='extreme') G.hadExtreme=true;
+  G.evActive=ev;G.evEnd=Date.now()+ev.dur*1000;
+  if(ev.type==='prod')      {G.evPM=ev.val;G.evCM=1}
+  else if(ev.type==='click'){G.evCM=ev.val;G.evPM=1}
+  else if(ev.type==='all')  {G.evPM=ev.val;G.evCM=ev.val}
+  else if(ev.type==='mixed'){G.evCM=ev.val;G.evPM=ev.val2||1}
+  if(ev.special==='extreme')G.hadExtreme=true;
   compute();G.eventsTotal=(G.eventsTotal||0)+1;
   document.getElementById('epName').textContent=ev.name;
   document.getElementById('epDesc').textContent=ev.desc;
   const pp=document.getElementById('eventPopup');pp.classList.add('show');
   setTimeout(()=>pp.classList.remove('show'),3800);
-  document.getElementById('eventBox').style.display='block';
-  document.getElementById('evNm').textContent=ev.name;
-  document.getElementById('evDsc').textContent=ev.desc;
+  $.eventBox.style.display='block';$.evNm.textContent=ev.name;$.evDsc.textContent=ev.desc;
 }
 function tickEvent(){
-  if(!G.eActive) return;
-  const rem=G.eEnd-Date.now();
-  if(rem<=0){G.eActive=null;G.eEnd=0;G.ePM=1;G.eCM=1;compute();document.getElementById('eventBox').style.display='none';return}
-  document.getElementById('evTm').textContent='⏱ '+Math.ceil(rem/1000)+'s';
+  if(!G.evActive)return;
+  const rem=G.evEnd-Date.now();
+  if(rem<=0){G.evActive=null;G.evEnd=0;G.evPM=1;G.evCM=1;compute();$.eventBox.style.display='none';return}
+  $.evTm.textContent='⏱ '+Math.ceil(rem/1000)+'s';
 }
 
-// ════════════════════════════════════════════
-// HAIR VISUAL
-// ════════════════════════════════════════════
-function getStageIdx(){let i=0;for(let j=0;j<STAGES.length;j++) if(G.atf>=STAGES[j].at) i=j;return i}
+// ═══════════════════════════════════════════════════════
+// HAIR VISUAL — usa getStageIdx() que aplica offset do Caio
+// Usa G.tf (não G.atf) → reseta no prestígio, Fase I automático!
+// ═══════════════════════════════════════════════════════
 function updateHair(){
-  const idx=getStageIdx();
+  const idx=getStageIdx(); // fase com offset do Caio se ativo
   for(let i=0;i<6;i++){const el=document.getElementById('hs'+i);if(el)el.style.opacity=i===STAGES[idx].hs?1:0}
-  document.getElementById('stageLabel').textContent=STAGES[idx].lbl;
+  const stg=STAGES[idx];
+  const caioIndicator=caioActive&&caioOffset>0?' 🎌':'';
+  $.stageLabel.textContent=stg.lbl+caioIndicator;
+  $.stageLabel.style.color=caioActive&&caioOffset>0?'#44ff88':'';
   const sh=document.getElementById('shineEl');
   if(idx>=4){sh.setAttribute('rx',28);sh.setAttribute('ry',12);sh.setAttribute('opacity',.4)}
   else{sh.setAttribute('rx',0);sh.setAttribute('ry',0);sh.setAttribute('opacity',0)}
@@ -1034,9 +1321,9 @@ function updateHair(){
     if(lh)lh.setAttribute('d','M'+(130+w)+' 66 Q'+(131+w)+' 48 130 40 Q'+(129-w)+' 48 '+(130+w)+' 66')}
 }
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // CANVAS HAIRS
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 const canvas=document.getElementById('hairCanvas'),ctx=canvas.getContext('2d');
 const hairs=[];let spawnAcc=0;
 function resizeCv(){const p=document.getElementById('centerPanel');canvas.width=p.offsetWidth;canvas.height=p.offsetHeight}
@@ -1044,19 +1331,22 @@ function spawnHairs(n=1,click=false){
   const r=headBtn.getBoundingClientRect(),cr=canvas.getBoundingClientRect();
   const cx=r.left-cr.left+r.width/2,cy=r.top-cr.top+r.height*.2;
   for(let i=0;i<n;i++){
-    if(hairs.length>=MAX_HAIRS) hairs.shift();
-    hairs.push({x:cx+(Math.random()-.5)*r.width*.55,y:cy+Math.random()*20,
+    if(hairs.length>=MAX_HAIRS)hairs.shift();
+    hairs.push({
+      x:cx+(Math.random()-.5)*r.width*.55,y:cy+Math.random()*20,
       vx:(Math.random()-.5)*(click?2.8:1.2),vy:click?-Math.random()*2.2-.4:Math.random()*.55+.12,
       len:Math.random()*24+7,angle:Math.random()*Math.PI*2,va:(Math.random()-.5)*.09,alpha:1,
       color:'hsl('+(20+~~(Math.random()*20))+','+(44+~~(Math.random()*26))+'%,'+(11+~~(Math.random()*18))+'%)',
-      wave:Math.random()*Math.PI*2,ws:.03+Math.random()*.04,grav:click?.16:.03+Math.random()*.03});
+      wave:Math.random()*Math.PI*2,ws:.03+Math.random()*.04,grav:click?.16:.03+Math.random()*.03
+    });
   }
 }
 function drawCv(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   for(let i=hairs.length-1;i>=0;i--){
-    const h=hairs[i];h.wave+=h.ws;h.vx+=Math.sin(h.wave)*.05;h.vy+=h.grav;h.x+=h.vx;h.y+=h.vy;h.angle+=h.va;
-    if(h.y>canvas.height*.83) h.alpha-=.03;
+    const h=hairs[i];
+    h.wave+=h.ws;h.vx+=Math.sin(h.wave)*.05;h.vy+=h.grav;h.x+=h.vx;h.y+=h.vy;h.angle+=h.va;
+    if(h.y>canvas.height*.83)h.alpha-=.03;
     if(h.alpha<=0||h.y>canvas.height+50){hairs.splice(i,1);continue}
     ctx.save();ctx.globalAlpha=h.alpha;ctx.strokeStyle=h.color;ctx.lineWidth=1.8;ctx.lineCap='round';
     ctx.translate(h.x,h.y);ctx.rotate(h.angle);
@@ -1065,55 +1355,57 @@ function drawCv(){
   }
 }
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // UI
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 function fmt(n){n=Math.floor(n);if(n>=1e18)return(n/1e18).toFixed(2)+'Qi';if(n>=1e15)return(n/1e15).toFixed(2)+'Qa';if(n>=1e12)return(n/1e12).toFixed(2)+'T';if(n>=1e9)return(n/1e9).toFixed(2)+'B';if(n>=1e6)return(n/1e6).toFixed(2)+'M';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return''+n}
 function fmt2(n){if(n>=1000)return fmt(n);if(n>=10)return n.toFixed(1);return n.toFixed(2)}
 function fmtTime(s){const h=~~(s/3600),m=~~((s%3600)/60),ss=~~(s%60);return h?h+'h '+m+'m':m?m+'m '+ss+'s':ss+'s'}
 
 function quickUI(){
   compute();
-  document.getElementById('tbFios').textContent=fmt(G.fios);
-  document.getElementById('tbPs').textContent=fmt2(G.tps)+'/s';
-  document.getElementById('cpDisp').textContent=fmt(G.cp);
-  document.getElementById('tbCaspa').textContent=G.caspa;
-  const pct=Math.min(100,G.atf/WIN_AT*100);
-  document.getElementById('baldFill').style.width=pct.toFixed(2)+'%';
-  document.getElementById('baldLbl').textContent='CALVÍCIE: '+pct.toFixed(2)+'%';
+  $.tbFios.textContent=fmt(G.fios);
+  $.tbPs.textContent=fmt2(G.tps)+'/s';
+  $.cpDisp.textContent=fmt(G.cp);
+  $.tbCaspa.textContent=G.caspa;
+  // CALVÍCIE — baseada em G.tf (reseta no prestígio, não acumula para sempre!)
+  const pct=Math.min(100,G.tf/BALD_MAX*100);
+  $.baldFill.style.width=pct.toFixed(1)+'%';
+  $.baldLbl.textContent='CALVÍCIE: '+pct.toFixed(1)+'%'+(caioActive?' 🎌 CAIO-SAN!':'');
   const fc=(forcaMultiplier()-1)*100;
-  document.getElementById('forcaLabel').textContent='FORÇA CAPILAR: +'+fc.toFixed(0)+'%';
-  document.getElementById('forcaFill').style.width=Math.min(100,fc/50*100)+'%';
-  document.getElementById('fcPct').textContent=fc.toFixed(0);
-  document.getElementById('forcaCapilarDisplay').style.display=fc>0?'block':'none';
+  $.forcaLabel.textContent='FORÇA: +'+fc.toFixed(0)+'%';
+  $.forcaFill.style.width=Math.min(100,fc/50*100)+'%';
+  $.fcPct.textContent=fc.toFixed(0);
+  $.forcaCapilarDisplay.style.display=fc>0?'block':'none';
   if(comboMult>1){
-    document.getElementById('comboWrap').style.display='flex';
-    document.getElementById('comboLbl').textContent='COMBO: ×'+comboMult.toFixed(1);
-    document.getElementById('comboFill').style.width=(comboMult/COMBO_MAX*100)+'%';
-    document.getElementById('comboInline').style.display='inline';
-    document.getElementById('comboInline').textContent='⚡×'+comboMult.toFixed(1);
+    $.comboWrap.style.display='flex';
+    $.comboLbl.textContent='COMBO: ×'+comboMult.toFixed(1);
+    $.comboFill.style.width=(comboMult/COMBO_MAX*100)+'%';
+    $.comboInline.style.display='inline';
+    $.comboInline.textContent='⚡×'+comboMult.toFixed(1);
+    $.comboInline.classList.toggle('max',comboMult>=COMBO_MAX);
   }else{
-    document.getElementById('comboWrap').style.display='none';
-    document.getElementById('comboInline').style.display='none';
+    $.comboWrap.style.display='none';
+    $.comboInline.style.display='none';
+    $.comboInline.classList.remove('max');
   }
-  document.getElementById('achCount').textContent=G.ach.length+'/'+ACHIEVEMENTS.length;
+  $.achCount.textContent=G.ach.length+'/'+ACHIEVEMENTS.length;
 }
 function updateUI(){
   quickUI();
-  document.getElementById('sTot').textContent=fmt(G.atf);
-  document.getElementById('sPs').textContent=fmt2(G.tps);
-  document.getElementById('sCp').textContent=fmt(G.cp);
-  document.getElementById('sCl').textContent=fmt(G.tc);
-  document.getElementById('sPres').textContent=G.pres;
-  document.getElementById('sCaspaT').textContent=G.tCaspa;
+  $.sTot.textContent=fmt(G.atf);
+  $.sPs.textContent=fmt2(G.tps);
+  $.sCp.textContent=fmt(G.cp);
+  $.sCl.textContent=fmt(G.tc);
+  $.sPres.textContent=G.pres;
+  $.sCaspaT.textContent=G.tCaspa;
 }
 
-// ════════════════════════════════════════════
-// BUILD TABS
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════
 function buildBldTab(){
-  const c=document.getElementById('tab-buildings'); c.innerHTML='';
-  // multiplier row
+  const c=document.getElementById('tab-buildings');c.innerHTML='';
   const mr=document.createElement('div');mr.className='buy-mult-row';
   mr.innerHTML=`<span class="buy-mult-label">QUANTIDADE:</span>
     <button class="mult-btn ${buyMult===1?'active':''}" onclick="setBuyMult(1)">×1</button>
@@ -1123,36 +1415,29 @@ function buildBldTab(){
   for(const b of BUILDINGS){
     const n=G.bld[b.id]||0,cost=bldCost(b);
     const unl=G.atf>=b.unlockAt||n>0;
-    let displayCost=cost;
-    let canBuy=unl&&G.fios>=cost;
+    let dispCost=cost,canBuy=unl&&G.fios>=cost,count=1;
     if(buyMult>1&&unl){
-      // how many can we actually buy
-      let tot=0,fLeft=G.fios,count=0;
-      for(let i=0;i<buyMult;i++){const c2=Math.ceil(b.baseCost*Math.pow(1.15,n+i));if(fLeft>=c2){fLeft-=c2;tot+=c2;count++}else break}
-      canBuy=count>0;
-      displayCost=tot;
+      let tot=0,fLeft=G.fios,cnt=0;
+      for(let i=0;i<buyMult;i++){const c2=Math.ceil(b.baseCost*Math.pow(1.15,n+i));if(fLeft>=c2){fLeft-=c2;tot+=c2;cnt++}else break}
+      count=cnt;canBuy=cnt>0;dispCost=tot;
     }
     const ps=n>0?fmt2(n*b.basePs)+'/s':'';
-    const bldPct=Math.min(100,n/50*100); // tier 3 at 50
+    const bldPct=Math.min(100,n/50*100);
+    const multLabel=buyMult>1?(count<buyMult?' (×'+count+'/'+buyMult+')':' (×'+buyMult+')'):'';
     const el=document.createElement('button');
     el.className='bld-item'+(unl?(canBuy?' can-buy':''):' locked');
-    el.disabled=!unl; el.onclick=()=>buyBld(b.id);
+    el.disabled=!unl;el.onclick=()=>buyBld(b.id);
     el.innerHTML=`<div class="bld-prod-bar" style="width:${bldPct}%"></div>
       <div class="bld-top"><span class="bld-name">${b.emoji} ${b.name}</span><span class="bld-owned">×${n}</span></div>
-      <div class="bld-row2">
-        <span class="bld-desc">${unl?b.desc:'🔒 Desbloqueado em '+fmt(b.unlockAt)+' fios'}</span>
-        <span class="bld-ps">${ps}</span>
-      </div>
-      <div class="bld-cost ${canBuy?'ok':'no'}">${unl?'💀 '+fmt(displayCost)+(buyMult>1?' (×'+buyMult+')':''):''}</div>`;
+      <div class="bld-row2"><span class="bld-desc">${unl?b.desc:'🔒 Desbloqueado em '+fmt(b.unlockAt)+' fios'}</span><span class="bld-ps">${ps}</span></div>
+      <div class="bld-cost ${canBuy?'ok':'no'}">${unl?'💀 '+fmt(dispCost)+multLabel:''}</div>`;
     c.appendChild(el);
   }
   dirty.bld=false;
 }
-
 function buildUpgTab(){
   const c=document.getElementById('tab-upgrades');c.innerHTML='';
-  // click upgrades
-  const cSec=document.createElement('div');cSec.className='shop-cat';cSec.textContent='⚡ UPGRADES DE CLIQUE';c.appendChild(cSec);
+  c.innerHTML+='<div class="shop-cat">⚡ UPGRADES DE CLIQUE</div>';
   for(const u of CLICK_UPGRADES){
     const unl=G.atf>=u.req||G.cu[u.id],bought=!!G.cu[u.id],can=!bought&&unl&&G.fios>=u.cost;
     const el=document.createElement('button');
@@ -1160,20 +1445,19 @@ function buildUpgTab(){
     el.disabled=bought||!unl;el.onclick=()=>buyClkUpg(u.id);
     el.innerHTML=`<div class="upg-top"><span class="upg-name">${u.name}</span>
       <span class="upg-badge">${bought?'✓':!unl?'🔒 '+fmt(u.req):''}</span></div>
-      <div class="upg-desc">${unl?u.desc:'Precisa de '+fmt(u.req)+' fios totais'}</div>
+      <div class="upg-desc">${unl?'Poder de click':'Requer '+fmt(u.req)+' fios totais'}</div>
       <div class="upg-eff">${unl?u.eff:''}</div>
-      <div class="upg-cost ${can?'ok':'no'}">${bought?'COMPRADO':unl?'💀 '+fmt(u.cost)+' fios':'🔒'}</div>`;
+      <div class="upg-cost ${can?'ok':'no'}">${bought?'COMPRADO':unl?'💀 '+fmt(u.cost):' 🔒'}</div>`;
     c.appendChild(el);
   }
-  // building upgrades
   const bSec=document.createElement('div');bSec.className='shop-cat';bSec.textContent='🏠 UPGRADES DE PRÉDIOS';c.appendChild(bSec);
   let any=false;
   for(const b of BUILDINGS){
     const n=G.bld[b.id]||0;
     for(const t of BLD_TIERS){
       const key=b.id+'_'+t.count,bought=!!G.bu[key],avail=n>=t.count;
-      if(!bought&&!avail&&n<Math.ceil(t.count*.4)&&G.atf<b.unlockAt*3) continue;
-      if(!bought&&G.atf<b.unlockAt&&n===0) continue;
+      if(!bought&&!avail&&n<Math.ceil(t.count*.4)&&G.atf<b.unlockAt*3)continue;
+      if(!bought&&G.atf<b.unlockAt&&n===0)continue;
       any=true;
       const cost=Math.ceil(b.baseCost*t.cm),can=avail&&!bought&&G.fios>=cost;
       const el=document.createElement('button');
@@ -1181,32 +1465,34 @@ function buildUpgTab(){
       el.disabled=bought||!avail;el.onclick=()=>buyBldUpg(b.id,t.count);
       el.innerHTML=`<div class="upg-top"><span class="upg-name">${b.emoji} ${b.name} Nv ${t.lbl}</span>
         <span class="upg-badge">${bought?'✓':n+'/'+t.count}</span></div>
-        <div class="upg-desc">${avail||bought?'×'+t.mult+' produção':'Requer '+t.count+'× (possui '+n+')'}</div>
-        <div class="upg-eff">${avail||bought?'×'+t.mult+' fios/s':''}</div>
-        <div class="upg-cost ${can?'ok':'no'}">${bought?'COMPRADO':avail?'💀 '+fmt(cost)+' fios':'🔒 '+t.count+'× necessário'}</div>`;
+        <div class="upg-eff">${avail||bought?'×'+t.mult+' produção':n+'/'+t.count+' para desbloquear'}</div>
+        <div class="upg-cost ${can?'ok':'no'}">${bought?'COMPRADO':avail?'💀 '+fmt(cost):' 🔒 '+t.count+'× necessário'}</div>`;
       c.appendChild(el);
     }
   }
-  if(!any){const m=document.createElement('div');m.style.cssText='color:var(--dim);font-size:11px;text-align:center;margin-top:10px';m.textContent='Compre prédios para desbloquear';c.appendChild(m)}
+  if(!any){const m=document.createElement('div');m.style.cssText='color:var(--dim);font-size:11px;text-align:center;margin-top:10px';m.textContent='Compre prédios para desbloquear upgrades';c.appendChild(m)}
   dirty.upg=false;
 }
-
 function buildPrestigeTab(){
   const c=document.getElementById('tab-prestige'),gain=caspaGain();
   c.innerHTML=`<div class="caspa-card">
     <span style="font-size:10px;color:var(--dim);letter-spacing:2px">💜 CASPA DISPONÍVEL</span>
     <span class="caspa-big">${G.caspa} 🧫</span>
-    <div style="font-size:11px;color:var(--dim);margin-top:4px">Total: ${G.tCaspa} | Prestígios: ${G.pres}</div>
-    <div style="font-size:11px;color:var(--dim);margin-top:2px">${gain>0?'Disponível: <span style="color:#d080f0">+'+gain+' caspa</span>':G.atf<1e6?'Faltam: <span style="color:#d080f0">'+fmt(1e6-G.atf)+'</span> fios':'Acumule mais fios'}</div>
-    <div style="font-size:10px;color:var(--dim);margin-top:2px">Fórmula: √(fios totais ÷ 1.000.000) − caspa já ganha</div>
-  </div><div class="shop-cat">💜 UPGRADES ETERNOS</div>`;
+    <div style="font-size:11px;color:var(--dim);margin-top:4px">Total: ${G.tCaspa} · Prestígios: ${G.pres}</div>
+    <div style="font-size:11px;margin-top:4px">${gain>0?'Disponível: <span style="color:#d080f0">+'+gain+' caspa</span>':'Acumule mais fios all-time'}</div>
+    <div style="font-size:10px;color:#a060d8;margin-top:6px;line-height:1.5;border-top:1px solid rgba(160,96,216,.2);padding-top:5px">
+      ⚠️ Ao prestigiar, <b>o cabelo volta à FASE I</b> — ciclo completo se reinicia!<br>
+      Prédios, fios e upgrades normais são resetados.<br>
+      A barra de calvície também reseta para 0%.
+    </div>
+  </div><div class="shop-cat">💜 UPGRADES ETERNOS (CASPA)</div>`;
   for(const u of CASPA_UPGRADES){
     const bought=!!G.csu[u.id],can=!bought&&G.caspa>=u.cost;
     const el=document.createElement('button');
     el.className='caspa-upg'+(bought?' bought':!can?' locked':'');
     el.disabled=bought;el.onclick=()=>buyCaspaUpg(u.id);
     el.innerHTML=`<div class="cu-name">${u.name}${bought?' ✓':''}</div>
-      <div class="cu-desc">${u.desc}</div><div class="cu-eff">${u.eff}</div>
+      <div class="cu-eff">${u.eff}</div>
       <div class="cu-cost ${can?'ok':''}">${bought?'COMPRADO':'🧫 '+u.cost+' caspa'}</div>`;
     c.appendChild(el);
   }
@@ -1216,40 +1502,39 @@ function buildPrestigeTab(){
   c.appendChild(btn);
   dirty.pres=false;
 }
-
 function buildStatsTab(){
   const c=document.getElementById('tab-stats');c.innerHTML='';
-  const playSecs=Math.round((Date.now()-G.startTime)/1000);
+  const playSecs=Math.round(((G.playtime||0)));
   const sections=[
     {title:'📊 PRODUÇÃO',rows:[
-      ['Fios atuais',fmt(G.fios)],
-      ['Fios totais (all-time)',fmt(G.atf)],
+      ['Fios (run atual)',fmt(G.tf)],
+      ['Fios all-time',fmt(G.atf)],
       ['Fios/segundo',fmt2(G.tps)],
+      ['Calvície (ciclo atual)',(Math.min(100,G.tf/BALD_MAX*100)).toFixed(1)+'%'],
+      ['Fase atual',STAGES[getRealStageIdx()].lbl],
+      ['Fase (com Caio)',caioActive?STAGES[getStageIdx()].lbl+' 🎌':'—'],
       ['Força Capilar','+'+((forcaMultiplier()-1)*100).toFixed(0)+'%'],
-      ['Multiplicador prod.',G.ePM>1?'×'+G.ePM:G.ePM<1?'×'+G.ePM:'—'],
     ]},
     {title:'👆 CLIQUES',rows:[
       ['Total de clicks',fmt(G.tc)],
-      ['Poder de click atual',fmt(G.cp)],
-      ['Multiplicador click',G.eCM>1?'×'+G.eCM:'—'],
+      ['Poder de click',fmt(G.cp)],
       ['Combos totais',fmt(G.combosTotal)],
     ]},
-    {title:'🌟 FIO DOURADO',rows:[
+    {title:'🌟 FIO DOURADO & CAIO',rows:[
       ['Fios Dourados clicados',G.goldenClicks],
-      ['Próximo em',gfActive?'ATIVO!':fmtTime(Math.max(0,(G.nextGolden-Date.now())/1000))],
-    ]},
-    {title:'🏆 CONQUISTAS',rows:[
-      ['Desbloqueadas',G.ach.length+' / '+ACHIEVEMENTS.length],
-      ['Bônus de produção','+'+G.ach.length+'%'],
+      ['🎌 Caio-san ativações',G.caioActivations||0],
+      ['Próximo Fio Dourado',gfActive?'ATIVO!':fmtTime(Math.max(0,(G.nextGolden-Date.now())/1000))],
     ]},
     {title:'💜 PRESTÍGIO',rows:[
       ['Prestígios realizados',G.pres],
       ['Caspa atual',G.caspa],
-      ['Caspa total acumulada',G.tCaspa],
-      ['Caspa disponível p/ ganhar',caspaGain()],
+      ['Caspa total',G.tCaspa],
+      ['Próximo ganho',caspaGain()],
     ]},
-    {title:'⏱ JOGO',rows:[
-      ['Tempo de jogo',fmtTime(playSecs)],
+    {title:'🏆 RANK & CONQUISTAS',rows:[
+      ['Jogador',currentUser?currentUser.username:'Visitante'],
+      ['Conquistas',G.ach.length+'/'+ACHIEVEMENTS.length],
+      ['No Top 100',G.inTop100?'✓ Sim':'Não'],
       ['Eventos vividos',G.eventsTotal],
       ['Prédios totais',totBld(G)],
     ]},
@@ -1266,40 +1551,36 @@ function buildStatsTab(){
   }
   dirty.stats=false;
 }
-
 function setTab(name){
   document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['buildings','upgrades','prestige','stats'][i]===name));
   document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
-  if(name==='stats') buildStatsTab();
+  if(name==='prestige')buildPrestigeTab();
+  if(name==='stats')buildStatsTab();
 }
 function rebuildAll(){compute();markDirty();rebuildDirty();buildAchievLog()}
 function rebuildDirty(){
-  if(dirty.bld) buildBldTab();
-  if(dirty.upg) buildUpgTab();
-  if(dirty.pres) buildPrestigeTab();
-  // stats rebuilt on tab open
+  if(dirty.bld)buildBldTab();
+  if(dirty.upg)buildUpgTab();
+  if(dirty.pres&&document.getElementById('tab-prestige').classList.contains('active'))buildPrestigeTab();
 }
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // ACHIEVEMENTS
-// ════════════════════════════════════════════
-const achQ=[];let achShowing=false;
+// ═══════════════════════════════════════════════════════
+const achQ=[];let achShowing=false,achT=null;
 function checkAch(){
   for(const a of ACHIEVEMENTS){
     if(!G.ach.includes(a.id)&&a.req(G)){
       G.ach.push(a.id);achQ.push(a);
-      const el=document.getElementById('ach-'+a.id);
-      if(el) el.classList.add('done');
-      // recompute because force multiplier changed
+      const el=document.getElementById('ach-'+a.id);if(el)el.classList.add('done');
       compute();dirty.bld=true;dirty.upg=true;
     }
   }
   showNextAch();
 }
-let achT=null;
 function showNextAch(){
-  if(achShowing||!achQ.length) return;
+  if(achShowing||!achQ.length)return;
   const a=achQ.shift();achShowing=true;
   document.getElementById('apIcon').textContent=a.icon;
   document.getElementById('apName').textContent=a.name;
@@ -1317,82 +1598,121 @@ function buildAchievLog(){
   }
 }
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // NEWS
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 let newsIdx=0;
 function nextNews(){
   newsIdx=(newsIdx+1)%NEWS.length;
   const el=document.getElementById('newsText');
-  el.textContent='📰  '+NEWS[newsIdx]+'  ◆  '+NEWS[(newsIdx+1)%NEWS.length]+'  ◆  '+NEWS[(newsIdx+2)%NEWS.length];
-  el.style.animation='none'; void el.offsetWidth; el.style.animation='newsScroll 45s linear infinite';
+  el.textContent='📰 '+NEWS[newsIdx]+'  ◆  '+NEWS[(newsIdx+1)%NEWS.length]+'  ◆  '+NEWS[(newsIdx+2)%NEWS.length];
+  el.style.animation='none';void el.offsetWidth;el.style.animation='newsScroll 45s linear infinite';
 }
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // WIN + TOAST
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 let won=false;
 function checkWin(){
-  if(won||G.atf<WIN_AT) return; won=true;
+  if(won||G.atf<WIN_AT)return;won=true;
   setTimeout(()=>{
-    document.getElementById('brStats').textContent=fmt(G.atf)+' fios  •  '+G.pres+' prestígios  •  '+fmt(G.tc)+' clicks  •  '+G.goldenClicks+' Fios Dourados  •  '+G.ach.length+'/'+ACHIEVEMENTS.length+' conquistas';
+    document.getElementById('brStats').textContent=fmt(G.atf)+' fios  •  '+G.pres+' prestígios  •  '+fmt(G.tc)+' clicks  •  '+G.goldenClicks+' FDs  •  '+G.ach.length+'/'+ACHIEVEMENTS.length+' conquistas  •  Caio: '+G.caioActivations+'×';
     document.getElementById('brutal').style.display='flex';
     for(let i=0;i<80;i++) setTimeout(()=>spawnHairs(3,true),i*35);
+    updateLBEntry();
   },600);
 }
 function restartGame(){
   document.getElementById('brutal').style.display='none';won=false;gfActive=false;
-  document.getElementById('goldenFio').style.display='none';
+  if($.goldenFio)$.goldenFio.style.display='none';
+  caioActive=false;caioOffset=0;clearInterval(caioInterv);
   G=newState();compute();markDirty();rebuildAll();updateUI();
 }
 let toastT;
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2700)}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2700);
+}
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // GAME LOOP
-// ════════════════════════════════════════════
-let lt=Date.now(),uiAcc=0,shopAcc=0,goldenAcc=0;
+// ═══════════════════════════════════════════════════════
+let lt=Date.now(),uiAcc=0,shopAcc=0;
 function loop(){
   const now=Date.now(),dt=Math.min((now-lt)/1000,.5);lt=now;
   G.playtime=(G.playtime||0)+dt;
   if(!won&&G.tps>0){
     const gain=G.tps*dt;G.fios+=gain;G.tf+=gain;G.atf+=gain;
     spawnAcc+=gain;
-    if(spawnAcc>30){spawnHairs(Math.min(Math.floor(spawnAcc/30),4));spawnAcc=spawnAcc%30}
+    if(spawnAcc>30){spawnHairs(Math.min(Math.floor(spawnAcc/30),4));spawnAcc%=30}
   }
   if(comboMult>1){
     comboMult=Math.max(1,comboMult-COMBO_DECAY*dt);
-    if(comboMult<=1){comboMult=1;document.getElementById('comboWrap').style.display='none';document.getElementById('comboInline').style.display='none'}
+    if(comboMult<=1){comboMult=1;comboWasMax=false;$.comboWrap.style.display='none';$.comboInline.style.display='none';$.comboInline.classList.remove('max')}
   }
-  uiAcc+=dt; if(uiAcc>.15){uiAcc=0;if(!won)quickUI()}
+  uiAcc+=dt;if(uiAcc>.15){uiAcc=0;if(!won)quickUI()}
   shopAcc+=dt;
   if(shopAcc>1.8){shopAcc=0;
-    if(!won){
-      compute();rebuildDirty();updateUI();checkAch();checkWin();
-      tickEvent();tickGolden();
+    if(!won){compute();rebuildDirty();updateUI();checkAch();checkWin();tickEvent();tickGolden();
       if(now>=G.nextEv){G.nextEv=now+rand(60000,120000);triggerEvent()}
-      if(!gfActive&&now>=G.nextGolden){spawnGoldenFio()}
+      if(!gfActive&&now>=G.nextGolden)spawnGoldenFio();
     }
   }
-  goldenAcc+=dt;if(goldenAcc>.25){goldenAcc=0;tickGolden()}
   updateHair();drawCv();
   requestAnimationFrame(loop);
 }
 
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // INIT
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 window.addEventListener('resize',resizeCv);
 window.addEventListener('load',()=>{
-  resizeCv();loadSave();compute();rebuildAll();updateUI();tryAudio();
-  document.getElementById('newsText').textContent='📰  '+NEWS[0]+'  ◆  '+NEWS[1]+'  ◆  '+NEWS[2];
+  // Cachear todos os elementos de hot path
+  ['tbFios','tbPs','cpDisp','tbCaspa','forcaLabel','forcaFill','baldFill','baldLbl',
+   'comboWrap','comboLbl','comboFill','comboInline','forcaCapilarDisplay','fcPct',
+   'achCount','sTot','sPs','sCp','sCl','sPres','sCaspaT',
+   'eventBox','evNm','evDsc','evTm',
+   'goldenFio','goldenTimer','gfCountdown',
+   'flashOverlay','stageLabel','audioBtn','userDisplay'].forEach(id=>$[id]=document.getElementById(id));
+
+  resizeCv();
+  seedLB(); // seed apenas se não existir
+
+  // ══ EASTER EGG: clique DIREITO no Fio Dourado → CAIO aparece! ══
+  $.goldenFio.addEventListener('contextmenu',e=>{
+    e.preventDefault();
+    if(!gfActive)return;
+    // ATIVOU O EASTER EGG!
+    gfActive=false;
+    $.goldenFio.style.display='none';
+    $.goldenTimer.style.display='none';
+    G.nextGolden=Date.now()+rand(120000,300000);
+    triggerCaio();
+  });
+
+  loadSave();
+  compute();rebuildAll();updateUI();
+  tryAudio();
+
+  document.getElementById('newsText').textContent='📰 '+NEWS[0]+'  ◆  '+NEWS[1]+'  ◆  '+NEWS[2];
   setInterval(nextNews,45000);
+
+  // Auto-save a cada 60 segundos
   setInterval(()=>{
     saveGame(true);
     const tb=document.getElementById('topbar');
     tb.style.borderBottomColor='#2a5a10';
     setTimeout(()=>tb.style.borderBottomColor='',500);
   },60000);
+
+  // Auth: verifica sessão existente ou mostra login
+  if(!loadSession()){
+    showLoginModal();
+  }else{
+    updateLBEntry(); // já logado, sincroniza score
+    showToast('👤 Bem-vindo de volta, '+currentUser.username+'!');
+  }
+
   loop();
 });
 </script>

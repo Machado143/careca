@@ -7,7 +7,7 @@
     "start": "python -m http.server 8000",
     "dev": "http-server -p 8000 -o",
     "build": "echo 'Static site - no build needed'",
-  "test": "echo 'Sem suite automatizada. Abra o jogo e confira o Console (F12).'"
+    "test": "echo 'Sem suite automatizada. Abra o jogo e confira o Console (F12).'"
   },
   "keywords": [
     "clicker",
