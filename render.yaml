@@ -6,7 +6,7 @@ services:
     staticPublishPath: .
     routes:
       - path: /
-        destination: /karlan.html
+  destination: /index.html
     headers:
       - path: /*
         name: Cache-Control

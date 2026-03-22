@@ -2,7 +2,7 @@
   "name": "karlan-clicker",
   "version": "1.0.0",
   "description": "🎮 KARLAN CLICKER - Idle/Clicker Game | Vanilla JS + Canvas Physics",
-  "main": "karlan.html",
+  "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000",
     "dev": "http-server -p 8000 -o",
